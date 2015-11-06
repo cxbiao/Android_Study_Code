@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".largeimage.LargeImageSample"/>
+        <activity android:name=".GridHeaderActivity"/>
+        <activity android:name=".ProgressBarActivity"/>
     </application>
 
 </manifest>

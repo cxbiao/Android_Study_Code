@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listview;
 
     private List<String> title=new ArrayList<>();
-    private Class[] clazz=new Class[]{LargeImageSample.class};
+    private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTitle() {
         title.add("巨图展示");
+        title.add("带header的gridview");
+        title.add("各种进度条");
     }
 
 
