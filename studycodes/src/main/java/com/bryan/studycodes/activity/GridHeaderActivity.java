@@ -1,4 +1,4 @@
-package com.bryan.studycodes;
+package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.bryan.studycodes.R;
 import com.bryan.studycodes.widget.GridViewWithHeaderAndFooter;
 
 /**

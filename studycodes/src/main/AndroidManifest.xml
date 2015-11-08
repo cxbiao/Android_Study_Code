@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme"
         android:name=".MyApplication"
         >
-        <activity android:name=".MainActivity" >
+        <activity android:name=".activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +17,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".largeimage.LargeImageSample"/>
-        <activity android:name=".GridHeaderActivity"/>
-        <activity android:name=".ProgressBarActivity"/>
+        <activity android:name=".activity.GridHeaderActivity"/>
+        <activity android:name=".activity.ProgressBarActivity"/>
+        <activity android:name=".activity.MeasureActivity"/>
+        <receiver android:name=".appwidget.MyAppWidgetProvider">
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info"
+                />
+                <intent-filter>
+                    <action android:name="com.bryan.studycodes.action.CLICK"></action>
+                    <!--这个action必需要-->
+                    <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+                </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,10 +1,11 @@
-package com.bryan.studycodes;
+package com.bryan.studycodes.activity;
 
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.bryan.studycodes.R;
 import com.bryan.studycodes.widget.HorizontalProgressBarWithNumber;
 import com.bryan.studycodes.widget.RoundProgressBarWidthNumber;
 

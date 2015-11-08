@@ -1,4 +1,4 @@
-package com.bryan.studycodes;
+package com.bryan.studycodes.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.bryan.studycodes.R;
 import com.bryan.studycodes.largeimage.LargeImageSample;
 
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ListView listview;
 
     private List<String> title=new ArrayList<>();
-    private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class};
+    private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
+    ,MeasureActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         title.add("巨图展示");
         title.add("带header的gridview");
         title.add("各种进度条");
+        title.add("测量");
     }
 
 
