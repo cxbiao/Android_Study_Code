@@ -12,9 +12,16 @@ import java.net.FileNameMap;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
 
 
 public class SimpleUploadRequest extends SimplePostHttpRequest {
@@ -35,6 +42,21 @@ public class SimpleUploadRequest extends SimplePostHttpRequest {
         }
         URL netUrl = new URL(url);
         conn = (HttpURLConnection) netUrl.openConnection();
+        if (url.startsWith("https")){
+            //设置SSLContext
+            SSLContext sslcontext = SSLContext.getInstance("TLS");
+            sslcontext.init(null, new TrustManager[]{myX509TrustManager}, new SecureRandom());
+            HttpsURLConnection httpsConn=
+                    (HttpsURLConnection)conn;
+            //设置套接工厂
+            httpsConn.setSSLSocketFactory(sslcontext.getSocketFactory());
+            httpsConn.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+        }
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.setUseCaches(false);

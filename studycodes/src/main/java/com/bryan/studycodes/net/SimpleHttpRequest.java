@@ -24,8 +24,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 /**
  * 简单封装Http的操作，不使用第三方类库
+ * 支持https
  * 模型解析使用了FastJson，也可以不用
  *
  * Authro：Cxb
@@ -218,6 +222,26 @@ public abstract  class SimpleHttpRequest {
             sendSuccess(object);
         }
     }
+
+
+    public static TrustManager myX509TrustManager = new X509TrustManager() {
+
+
+        @Override
+        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws java.security.cert.CertificateException {
+
+        }
+
+        @Override
+        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws java.security.cert.CertificateException {
+
+        }
+
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new java.security.cert.X509Certificate[0];
+        }
+    };
 
 
     protected abstract void initConnection() throws Exception;

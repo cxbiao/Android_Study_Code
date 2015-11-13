@@ -98,7 +98,7 @@ public class HttpActivity extends AppCompatActivity {
 
     public void get(View v){
         new SimpleHttpRequest.Builder()
-                .url("https://github.com")
+                .url("https://kyfw.12306.cn/otn/")
                 .get(myCallBack);
 
     }
