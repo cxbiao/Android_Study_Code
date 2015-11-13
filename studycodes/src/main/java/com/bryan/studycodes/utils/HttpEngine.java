@@ -1,6 +1,7 @@
 package com.bryan.studycodes.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,22 +16,26 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * urlconnection上传文件
- * http://314858770.iteye.com/blog/720456
- * http://blog.csdn.net/wangpeng047/article/details/38303865
- */
-public class StreamUtils {
 
-	public static byte[] stream2ByteArray(InputStream is) throws Exception {
-		
-		ByteArrayOutputStream bos=new ByteArrayOutputStream();
-		byte[] buf=new byte[1024];
-		int len=0;
-		while((len=is.read(buf))!=-1){
-			bos.write(buf, 0, len);
+ */
+public class HttpEngine {
+
+	public static byte[] stream2ByteArray(InputStream is)  {
+
+		try {
+			ByteArrayOutputStream bos=new ByteArrayOutputStream();
+			byte[] buf=new byte[1024];
+			int len=0;
+			while((len=is.read(buf))!=-1){
+                bos.write(buf, 0, len);
+            }
+			bos.close();
+			is.close();
+			return bos.toByteArray();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		bos.close();
-		is.close();
-		return bos.toByteArray();
+		return null;
 	}
 	
     public static byte[] getBytesFromUrl(String url){
@@ -58,6 +63,11 @@ public class StreamUtils {
   		return null;
       
    }
+
+
+
+
+
 
 	/**
 	 * http://m.blog.csdn.net/blog/jianggujin/44964313

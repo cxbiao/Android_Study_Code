@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+
+    <!--模仿微信的输入框-->
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weixin_et_bg"
+        />
 
    <ListView
        android:id="@+id/listview"
@@ -11,4 +21,4 @@
        android:layout_height="match_parent"
        android:cacheColorHint="@android:color/transparent"
        />
-</RelativeLayout>
+</LinearLayout>

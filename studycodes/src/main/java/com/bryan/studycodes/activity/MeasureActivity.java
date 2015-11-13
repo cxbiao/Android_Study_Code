@@ -2,15 +2,16 @@ package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.utils.StreamUtils;
+import com.bryan.studycodes.net.SimpleHttpRequest;
+import com.bryan.studycodes.net.callback.RequestCallback;
 
-import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by bryan on 2015-11-08.
@@ -28,27 +29,7 @@ public class MeasureActivity extends AppCompatActivity {
         tv1 = (TextView) findViewById(R.id.tv1);
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                byte[] bytes= StreamUtils.getBytesFromHttps(
-                        "https://kyfw.12306.cn/otn");
-                int length=bytes.length;
-                try {
-                    final String str=new String(bytes,"UTF-8");
-                    tv1.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            tv1.setText(Html.fromHtml(str));
-                        }
-                    });
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
 
-
-            }
-        }).start();
        // measure2();
         // measure3();
        // measure4();

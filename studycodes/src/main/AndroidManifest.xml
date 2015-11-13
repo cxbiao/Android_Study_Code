@@ -12,7 +12,10 @@
         android:theme="@style/AppTheme"
         android:name=".MyApplication"
         >
-        <activity android:name=".activity.MainActivity" >
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +26,7 @@
         <activity android:name=".activity.GridHeaderActivity"/>
         <activity android:name=".activity.ProgressBarActivity"/>
         <activity android:name=".activity.MeasureActivity"/>
+        <activity android:name=".activity.HttpActivity"/>
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
