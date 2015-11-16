@@ -26,7 +26,7 @@
         <activity android:name=".activity.GridHeaderActivity"/>
         <activity android:name=".activity.ProgressBarActivity"/>
         <activity android:name=".activity.MeasureActivity"/>
-        <activity android:name=".activity.HttpActivity"/>
+        <activity android:name=".activity.MoveActivity"/>
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"

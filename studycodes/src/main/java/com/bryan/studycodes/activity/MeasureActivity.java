@@ -7,11 +7,6 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.net.SimpleHttpRequest;
-import com.bryan.studycodes.net.callback.RequestCallback;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by bryan on 2015-11-08.
@@ -31,7 +26,7 @@ public class MeasureActivity extends AppCompatActivity {
 
 
        // measure2();
-        // measure3();
+         measure3();
        // measure4();
     }
 

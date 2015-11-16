@@ -3,18 +3,32 @@ package com.bryan.studycodes.model;
 import java.io.Serializable;
 
 public class Course implements Serializable{
-	public int id;
-	public int timelength;
-	public String title;
+	private int id;
+	private int timelength;
+	private String title;
 
-	public Course(int id, int timelength, String title) {
-		this.id = id;
-		this.timelength = timelength;
-		this.title = title;
+	public int getId() {
+		return id;
 	}
 
-	public Course() {
-		
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getTimelength() {
+		return timelength;
+	}
+
+	public void setTimelength(int timelength) {
+		this.timelength = timelength;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override

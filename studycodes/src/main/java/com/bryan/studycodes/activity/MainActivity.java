@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> title=new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
-    ,MeasureActivity.class,HttpActivity.class};
+    ,MeasureActivity.class,MoveActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         title.add("带header的gridview");
         title.add("各种进度条");
         title.add("测量");
-        title.add("封装http");
+        title.add("滑动");
     }
 
 
