@@ -27,6 +27,7 @@
         <activity android:name=".activity.ProgressBarActivity"/>
         <activity android:name=".activity.MeasureActivity"/>
         <activity android:name=".activity.MoveActivity"/>
+        <activity android:name=".activity.MessengerActivity"/>
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
@@ -38,6 +39,10 @@
                     <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
                 </intent-filter>
         </receiver>
+        <service
+            android:name=".messenger.MessengerService"
+            android:process=":remote"
+            />
     </application>
 
 </manifest>

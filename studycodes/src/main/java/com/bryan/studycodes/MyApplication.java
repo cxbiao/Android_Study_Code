@@ -2,7 +2,11 @@ package com.bryan.studycodes;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.LinkedList;
 
@@ -12,11 +16,22 @@ import java.util.LinkedList;
  *
  */
 public class MyApplication extends Application  implements Application.ActivityLifecycleCallbacks{
+
+    private RefWatcher refWatcher;
+    public static RefWatcher getRefWatcher(Context context) {
+        MyApplication application = (MyApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
+        refWatcher = LeakCanary.install(this);
     }
+
+
 
     @Override
     public void onActivityCreated(Activity activity, Bundle arg1) {
@@ -120,6 +135,7 @@ public class MyApplication extends Application  implements Application.ActivityL
             mState = state;
         }
     }
+
 
     private LinkedList<ActivityInfo> mExistedActivitys = new LinkedList<ActivityInfo>();
 }
