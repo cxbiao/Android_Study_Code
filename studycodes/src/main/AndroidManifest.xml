@@ -28,6 +28,8 @@
         <activity android:name=".activity.MeasureActivity"/>
         <activity android:name=".activity.MoveActivity"/>
         <activity android:name=".activity.MessengerActivity"/>
+        <activity android:name=".activity.BookManagerActivity"/>
+        <activity android:name=".activity.ImageLoaderActivity"/>
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
@@ -41,6 +43,10 @@
         </receiver>
         <service
             android:name=".messenger.MessengerService"
+            android:process=":remote"
+            />
+        <service
+            android:name="com.bryan.aidl.BookManageService"
             android:process=":remote"
             />
     </application>

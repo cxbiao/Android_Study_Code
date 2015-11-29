@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> title=new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
-    ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class};
+    ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         title.add("测量");
         title.add("滑动");
         title.add("messenger");
+        title.add("AIDL");
+        title.add("ImageLoader");
     }
 
 
