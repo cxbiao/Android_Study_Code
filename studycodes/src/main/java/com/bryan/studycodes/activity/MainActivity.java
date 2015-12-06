@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> title=new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
-    ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class};
+    ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
+    ,CustomCameraActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         title.add("messenger");
         title.add("AIDL");
         title.add("ImageLoader");
+        title.add("自定义相机");
     }
 
 
