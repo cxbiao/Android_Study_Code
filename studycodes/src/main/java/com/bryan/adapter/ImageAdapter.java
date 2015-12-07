@@ -33,14 +33,6 @@ public class ImageAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setItemHeight(int height) {
-        if (height == mItemHeight) {
-            return;
-        }
-        mItemHeight = height;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getCount() {
         return imageUrls.length;
@@ -60,7 +52,7 @@ public class ImageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder=null;
         if (convertView==null){
-            convertView=View.inflate(context, R.layout.activity_image_item,null);
+            convertView=View.inflate(context, R.layout.item_list_imageloader,null);
             viewHolder=new ViewHolder();
             viewHolder.imageView= (ImageView) convertView.findViewById(R.id.image);
             convertView.setTag(viewHolder);
@@ -70,7 +62,7 @@ public class ImageAdapter extends BaseAdapter {
         ImageView iv=viewHolder.imageView;
         String url= getItem(position);
         if(mIsGridViewIdle){
-            ImageLoader.getInstance(context).bindBitmap(url,iv,R.mipmap.ic_launcher,mItemHeight,mItemHeight);
+            ImageLoader.getInstance(context).bindBitmap(url,iv,R.mipmap.ic_launcher);
        }
 
         return convertView;

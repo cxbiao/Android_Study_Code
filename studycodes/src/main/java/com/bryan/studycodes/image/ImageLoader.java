@@ -2,16 +2,21 @@ package com.bryan.studycodes.image;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.StatFs;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.LruCache;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import java.io.BufferedInputStream;
@@ -21,6 +26,7 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -130,14 +136,18 @@ public class ImageLoader  {
         return mMemoryCache.get(key);
     }
 
-    public void bindBitmap(String url,ImageView imageView,int resId){
-        bindBitmap(url, imageView, resId,0, 0);
+    public void bindBitmap(String uri,ImageView imageView,int resId){
+        ImageSize imageSize = getImageViewWidth(imageView);
+        int reqWidth = imageSize.width;
+        int reqHeight = imageSize.height;
+        bindBitmap(uri, imageView, resId, reqWidth, reqHeight);
     }
 
-    public void bindBitmap(final String url, final ImageView imageView, int resId,final int reqWidth, final int reqHeight){
-        imageView.setTag(url);
-        Bitmap bitmap=loadBitmapFromMemCache(url);
+    public void bindBitmap(final String uri, final ImageView imageView, int resId,final int reqWidth, final int reqHeight){
+        imageView.setTag(uri);
+        Bitmap bitmap=loadBitmapFromMemCache(uri);
         if(bitmap!=null){
+            Log.d(TAG, "loadBitmapFromMemCache,uri:" + uri);
             imageView.setImageBitmap(bitmap);
             return;
         }
@@ -145,9 +155,9 @@ public class ImageLoader  {
         Runnable loadBitmapTask=new Runnable() {
             @Override
             public void run() {
-                 Bitmap bitmap=loadBitmap(url,reqWidth,reqHeight);
+                 Bitmap bitmap=loadBitmap(uri,reqWidth,reqHeight);
                 if(bitmap!=null){
-                    LoaderResult result=new LoaderResult(imageView,url,bitmap);
+                    LoaderResult result=new LoaderResult(imageView,uri,bitmap);
                     mMainHandler.obtainMessage(MESSAGE_POST_RESULT,result).sendToTarget();
                 }
             }
@@ -155,26 +165,31 @@ public class ImageLoader  {
         THREAD_POOL_EXECUTOR.execute(loadBitmapTask);
     }
 
-    public Bitmap loadBitmap(String url,int reqWidth,int reqHeight){
-        Bitmap bitmap=loadBitmapFromMemCache(url);
+    public Bitmap loadBitmap(String uri,int reqWidth,int reqHeight){
+        Bitmap bitmap=loadBitmapFromMemCache(uri);
         if (bitmap!=null){
-            Log.d(TAG, "loadBitmapFromMemCache,url:"+url);
+            Log.d(TAG, "loadBitmapFromMemCache,uri:" + uri);
             return bitmap;
         }
+        boolean isNetImg=uri.startsWith("http");
         try {
-            bitmap=loadBitmapFromDiskCache(url,reqWidth,reqHeight);
+            if(!isNetImg){
+                Log.d(TAG, "loadBitmapFromLocal,uri:" + uri);
+                return loadBitmapFromLocal(uri,reqWidth,reqHeight);
+            }
+            bitmap=loadBitmapFromDiskCache(uri,reqWidth,reqHeight);
             if(bitmap!=null){
-                Log.d(TAG, "loadBitmapFromDisk,url:"+url);
+                Log.d(TAG, "loadBitmapFromDisk,uri:"+uri);
                 return bitmap;
             }
-            bitmap=loadBitmapFromHttp(url,reqWidth,reqHeight);
-            Log.d(TAG, "loadBitmapFromHttp,url:"+url);
+            bitmap=loadBitmapFromHttp(uri,reqWidth,reqHeight);
+            Log.d(TAG, "loadBitmapFromHttp,uri:"+uri);
         }catch (Exception e){
             e.printStackTrace();
         }
-        if(bitmap==null && !mIsDiskLruCacheCreated){
+        if(bitmap==null && !mIsDiskLruCacheCreated && isNetImg){
             Log.w(TAG, "encounter error,DiskLruCache is not created.");
-            bitmap=downloadBitmapFromUrl(url);
+            bitmap=downloadBitmapFromUrl(uri);
         }
         return bitmap;
     }
@@ -217,12 +232,47 @@ public class ImageLoader  {
         String key=hashKey(url);
         DiskLruCache.Snapshot snapShot=mDiskLruCache.get(key);
         if (snapShot!=null){
-            FileInputStream fileInputStream= (FileInputStream) snapShot.getInputStream(DISK_CACHE_INDEX);
-            FileDescriptor fd=fileInputStream.getFD();
-            bitmap=mImageResizer.decodeSampleBitmapFromFileDes(fd,reqWidth,reqHeight);
-            if(bitmap!=null){
-                addBitmapToMemCache(key,bitmap);
-            }
+            FileInputStream fis= (FileInputStream) snapShot.getInputStream(DISK_CACHE_INDEX);
+            FileDescriptor fd=fis.getFD();
+            bitmap=getDecodeBitmap(url,fd,reqWidth,reqHeight);
+        }
+        return bitmap;
+    }
+
+    private Bitmap loadBitmapFromLocal(String uri,int reqWidth,int reqHeight )  throws IOException{
+        if(Looper.myLooper()==Looper.getMainLooper()){
+            Log.w(TAG, "load bitmap from UI Thread,it's  not recommended!" );
+        }
+        Bitmap bitmap=null;
+        String key=hashKey(uri);
+        String file=null;
+        FileInputStream fis=null;
+        FileDescriptor fd=null;
+        if(uri.startsWith("file")){
+            file=uri.substring(uri.indexOf("/")+2);
+            fis=new FileInputStream(new File(file));
+            fd=fis.getFD();
+        }else if(uri.startsWith("content")){
+            file=getRealPath(mContext,Uri.parse(uri));
+            fis=new FileInputStream(new File(file));
+            fd=fis.getFD();
+        }else if(uri.startsWith("assets")){
+            file=uri.substring(uri.indexOf("/")+2);
+            fd=mContext.getAssets().openFd(file).getFileDescriptor();
+        }else {
+            return null;
+        }
+        bitmap=getDecodeBitmap(uri,fd,reqWidth,reqHeight);
+        return bitmap;
+    }
+
+
+    private Bitmap getDecodeBitmap(String uri,FileDescriptor fd,int reqWidth,int reqHeight ) throws IOException{
+        Bitmap bitmap=null;
+        String key=hashKey(uri);
+        bitmap=mImageResizer.decodeSampleBitmapFromFileDes(fd, reqWidth, reqHeight);
+        if(bitmap!=null){
+            addBitmapToMemCache(key,bitmap);
         }
         return bitmap;
     }
@@ -324,6 +374,87 @@ public class ImageLoader  {
         }
         StatFs stats=new StatFs(path.getAbsolutePath());
         return (long)stats.getBlockSize()*(long)stats.getAvailableBlocks();
+    }
+
+
+    /**
+     * 根据ImageView获得适当的压缩的宽和高
+     *
+     * @param imageView
+     * @return
+     */
+    private ImageSize getImageViewWidth(ImageView imageView)
+    {
+        ImageSize imageSize = new ImageSize();
+        final DisplayMetrics displayMetrics = imageView.getContext()
+                .getResources().getDisplayMetrics();
+        final LayoutParams params = imageView.getLayoutParams();
+
+        int width = params.width == LayoutParams.WRAP_CONTENT ? 0 : imageView.getWidth(); // Get actual image width
+        if (width <= 0)
+            width = params.width; // Get layout width parameter
+        if (width <= 0)
+            width = getImageViewFieldValue(imageView, "mMaxWidth"); // Check
+        // maxWidth
+        // parameter
+        if (width <= 0)
+            width = displayMetrics.widthPixels;
+        int height = params.height == LayoutParams.WRAP_CONTENT ? 0 : imageView.getHeight(); // Get actual image height
+        if (height <= 0)
+            height = params.height; // Get layout height parameter
+        if (height <= 0)
+            height = getImageViewFieldValue(imageView, "mMaxHeight"); // Check
+        // maxHeight
+        // parameter
+        if (height <= 0)
+            height = displayMetrics.heightPixels;
+        imageSize.width = width;
+        imageSize.height = height;
+        return imageSize;
+
+    }
+
+    /**
+     * 反射获得ImageView设置的最大宽度和高度
+     *
+     * @param object
+     * @param fieldName
+     * @return
+     */
+    private static int getImageViewFieldValue(Object object, String fieldName)
+    {
+        int value = 0;
+        try
+        {
+            Field field = ImageView.class.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            int fieldValue = (Integer) field.get(object);
+            if (fieldValue > 0 && fieldValue < Integer.MAX_VALUE)
+            {
+                value = fieldValue;
+
+                Log.e("TAG", value + "");
+            }
+        } catch (Exception e)
+        {
+        }
+        return value;
+    }
+
+    public static String getRealPath(Context context,Uri uri){
+        Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+        if(cursor.moveToFirst()){
+            return cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        }
+        return "";
+
+    }
+
+
+    private static class ImageSize
+    {
+        int width;
+        int height;
     }
 
     private static class LoaderResult {

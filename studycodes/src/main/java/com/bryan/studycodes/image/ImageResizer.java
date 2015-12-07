@@ -15,13 +15,22 @@ public class ImageResizer {
     public ImageResizer(){
 
     }
-    public Bitmap decodeSampledBitmapFromResource(Resources res,int resId,int reqWidth,int reqHeight){
+    public Bitmap decodeSampleBitmapFromResource(Resources res,int resId,int reqWidth,int reqHeight){
         BitmapFactory.Options options=new BitmapFactory.Options();
         options.inJustDecodeBounds=true;
         BitmapFactory.decodeResource(res,resId,options);
         options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
         options.inJustDecodeBounds=false;
         return BitmapFactory.decodeResource(res,resId,options);
+    }
+
+    public Bitmap decodeSampleBitmapFromFile(String path,int reqWidth,int reqHeight){
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inJustDecodeBounds=true;
+        BitmapFactory.decodeFile(path,options);
+        options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
+        options.inJustDecodeBounds=false;
+        return BitmapFactory.decodeFile(path,options);
     }
 
     public Bitmap decodeSampleBitmapFromFileDes(FileDescriptor fd,int reqWidth,int reqHeight){

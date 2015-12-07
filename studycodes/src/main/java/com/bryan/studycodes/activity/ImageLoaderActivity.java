@@ -1,20 +1,24 @@
 package com.bryan.studycodes.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ViewTreeObserver;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.bryan.adapter.ImageAdapter;
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.utils.ScreenUtils;
+import com.bryan.studycodes.image.ImageLoader;
 
 /**
  * Created by bryan on 2015-11-29.
  */
 public class ImageLoaderActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
     public final static String[] imageUrls = new String[]{
+            "http://news.xinhuanet.com/photo/2015-09/23/128257164_14429624216661n.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg",
@@ -105,25 +109,42 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
     GridView gridView;
     ImageAdapter mAdapter;
 
+    ImageView img_http;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageloader);
         gridView = (GridView) findViewById(R.id.gridview);
+        img_http= (ImageView) findViewById(R.id.img_http);
+
+      // String file="file://"+ Environment.getExternalStorageDirectory().getAbsolutePath()+"/qq中国.jpg";
+        String file="assets://tangyan.jpg";
+       ImageLoader.getInstance(this).bindBitmap(file,img_http,R.mipmap.ic_launcher);
+       // ImageLoader.getInstance(this).bindBitmap("http://imgphoto.gmw.cn/attachement/jpg/site2/20120511/001d0918b5731116c4ff3d.jpg",img_http,R.mipmap.ic_launcher);
+
+    //    mAdapter = new ImageAdapter(this, imageUrls);
+      //  gridView.setAdapter(mAdapter);
+       // gridView.setOnScrollListener(this);
 
 
-        mAdapter = new ImageAdapter(this, imageUrls);
-        gridView.setAdapter(mAdapter);
-        gridView.setOnScrollListener(this);
-        gridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int height=(gridView.getWidth()- ScreenUtils.dip2px(ImageLoaderActivity.this,5)*2)/3;
-                mAdapter.setItemHeight(height);
-                gridView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+    }
 
+
+    public  void onPic(View v){
+        Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*");
+        startActivityForResult(intent,3);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK && requestCode==3){
+            Uri uri=data.getData();
+            String stringuri=uri.toString();
+            System.out.println(stringuri);
+            ImageLoader.getInstance(this).bindBitmap(stringuri, img_http, R.mipmap.ic_launcher);
+        }
     }
 
     @Override
