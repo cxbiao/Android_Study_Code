@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
@@ -39,6 +40,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by bryan on 2015-11-29.
+ * 图片加载 可以是网络，文件,provider,asssets
+ * "file:///mnt/sdcard/abc.jpg";
+ * "content://.....";
+ * "assets://tangyan.jpg"; (现在还有些问题)
  */
 public class ImageLoader  {
 
@@ -258,7 +263,8 @@ public class ImageLoader  {
             fd=fis.getFD();
         }else if(uri.startsWith("assets")){
             file=uri.substring(uri.indexOf("/")+2);
-            fd=mContext.getAssets().openFd(file).getFileDescriptor();
+            InputStream is=mContext.getAssets().open(file);
+            return getDecodeBitmap(uri,is,reqWidth,reqHeight);
         }else {
             return null;
         }
@@ -266,6 +272,16 @@ public class ImageLoader  {
         return bitmap;
     }
 
+
+    private Bitmap getDecodeBitmap(String uri,InputStream is,int reqWidth,int reqHeight ) throws IOException{
+        Bitmap bitmap=null;
+        String key=hashKey(uri);
+        bitmap=mImageResizer.decodeSampleBitmapFromStream(is, reqWidth, reqHeight);
+        if(bitmap!=null){
+            addBitmapToMemCache(key,bitmap);
+        }
+        return bitmap;
+    }
 
     private Bitmap getDecodeBitmap(String uri,FileDescriptor fd,int reqWidth,int reqHeight ) throws IOException{
         Bitmap bitmap=null;

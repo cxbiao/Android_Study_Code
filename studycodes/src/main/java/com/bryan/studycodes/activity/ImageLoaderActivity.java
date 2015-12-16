@@ -118,8 +118,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
         gridView = (GridView) findViewById(R.id.gridview);
         img_http= (ImageView) findViewById(R.id.img_http);
 
-      // String file="file://"+ Environment.getExternalStorageDirectory().getAbsolutePath()+"/qq中国.jpg";
-        String file="assets://tangyan.jpg";
+       //String file="file://"+ Environment.getExternalStorageDirectory().getAbsolutePath()+"/qq中国.jpg";
+       String file="assets://login_app.png";
+
        ImageLoader.getInstance(this).bindBitmap(file,img_http,R.mipmap.ic_launcher);
        // ImageLoader.getInstance(this).bindBitmap("http://imgphoto.gmw.cn/attachement/jpg/site2/20120511/001d0918b5731116c4ff3d.jpg",img_http,R.mipmap.ic_launcher);
 
