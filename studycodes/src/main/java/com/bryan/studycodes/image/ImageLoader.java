@@ -24,6 +24,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,10 +41,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by bryan on 2015-11-29.
- * 图片加载 可以是网络，文件,provider,asssets
+ * 图片加载 可以是newwork，file,provider,asssets
+ * "http://www.baidu.com/ffd.jpg";
  * "file:///mnt/sdcard/abc.jpg";
  * "content://.....";
- * "assets://tangyan.jpg"; (现在还有些问题)
+ * "assets://tangyan.jpg";
  */
 public class ImageLoader  {
 
@@ -262,9 +264,9 @@ public class ImageLoader  {
             fis=new FileInputStream(new File(file));
             fd=fis.getFD();
         }else if(uri.startsWith("assets")){
-            file=uri.substring(uri.indexOf("/")+2);
-            InputStream is=mContext.getAssets().open(file);
-            return getDecodeBitmap(uri,is,reqWidth,reqHeight);
+             fis=new FileInputStream(getAssetFile(uri));
+             fd=fis.getFD();
+
         }else {
             return null;
         }
@@ -273,14 +275,26 @@ public class ImageLoader  {
     }
 
 
-    private Bitmap getDecodeBitmap(String uri,InputStream is,int reqWidth,int reqHeight ) throws IOException{
-        Bitmap bitmap=null;
+    private File getAssetFile(String uri) throws IOException{
+        String file=uri.substring(uri.indexOf("/") + 2);
         String key=hashKey(uri);
-        bitmap=mImageResizer.decodeSampleBitmapFromStream(is, reqWidth, reqHeight);
-        if(bitmap!=null){
-            addBitmapToMemCache(key,bitmap);
+        File cache=new File(mContext.getExternalCacheDir()+"/"+key);
+        if(cache.exists()){
+            return cache;
         }
-        return bitmap;
+        InputStream is=mContext.getAssets().open(file);
+        byte[] buf=new byte[1024];
+        int len;
+        BufferedInputStream bis=new BufferedInputStream(is);
+        BufferedOutputStream bos=new BufferedOutputStream(new FileOutputStream(cache));
+        while ((len=bis.read(buf))!=-1){
+            bos.write(buf,0,len);
+        }
+        bos.close();
+        bis.close();
+        return cache;
+
+
     }
 
     private Bitmap getDecodeBitmap(String uri,FileDescriptor fd,int reqWidth,int reqHeight ) throws IOException{

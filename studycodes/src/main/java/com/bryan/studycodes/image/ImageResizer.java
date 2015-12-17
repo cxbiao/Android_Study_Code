@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.FileDescriptor;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by bryan on 2015-11-29.
@@ -35,18 +33,6 @@ public class ImageResizer {
         return BitmapFactory.decodeFile(path, options);
     }
 
-    public Bitmap decodeSampleBitmapFromStream(InputStream is,int reqWidth,int reqHeight) throws IOException {
-        MarkableInputStream markStream = new MarkableInputStream(is);
-        is = markStream;
-        long mark = markStream.savePosition(65536); // TODO fix this crap.
-        BitmapFactory.Options options=new BitmapFactory.Options();
-        options.inJustDecodeBounds=true;
-        BitmapFactory.decodeStream(is, null, options);
-        options.inSampleSize=calculateInSampleSize(options,reqWidth,reqHeight);
-        options.inJustDecodeBounds=false;
-        markStream.reset(mark);
-        return BitmapFactory.decodeStream(is, null, options);
-    }
 
     public Bitmap decodeSampleBitmapFromFileDes(FileDescriptor fd,int reqWidth,int reqHeight){
         BitmapFactory.Options options=new BitmapFactory.Options();
