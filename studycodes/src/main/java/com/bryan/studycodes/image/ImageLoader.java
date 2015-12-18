@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by bryan on 2015-11-29.
- * 图片加载 可以是newwork，file,provider,asssets
+ * 图片加载 可以是newwork，file,provider,asssets,支持长图，宽图原图显示
  * "http://www.baidu.com/ffd.jpg";
  * "file:///mnt/sdcard/abc.jpg";
  * "content://.....";
@@ -93,12 +93,13 @@ public class ImageLoader  {
 
 
     private Context mContext;
-    private ImageResizer mImageResizer=new ImageResizer();
+    private ImageResizer mImageResizer;
     private LruCache<String,Bitmap> mMemoryCache;
     private DiskLruCache mDiskLruCache;
 
     private ImageLoader(Context context){
         mContext=context.getApplicationContext();
+        mImageResizer=new ImageResizer(mContext);
         int maxMemory= (int) (Runtime.getRuntime().maxMemory()/1024);  //统一KB单位
         int cacheSize=maxMemory/8;
         mMemoryCache=new LruCache<String,Bitmap>(cacheSize){
