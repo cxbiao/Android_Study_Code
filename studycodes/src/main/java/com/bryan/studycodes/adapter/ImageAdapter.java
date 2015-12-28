@@ -1,4 +1,4 @@
-package com.bryan.adapter;
+package com.bryan.studycodes.adapter;
 
 import android.content.Context;
 import android.view.View;

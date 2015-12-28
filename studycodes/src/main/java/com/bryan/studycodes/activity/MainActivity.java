@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> title=new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
-    ,CustomCameraActivity.class};
+    ,CustomCameraActivity.class,LetterActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         title.add("AIDL");
         title.add("ImageLoader");
         title.add("自定义相机");
+        title.add("SortLetter");
     }
 
 

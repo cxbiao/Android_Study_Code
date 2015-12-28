@@ -9,7 +9,7 @@ import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.bryan.adapter.ImageAdapter;
+import com.bryan.studycodes.adapter.ImageAdapter;
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.image.ImageLoader;
 

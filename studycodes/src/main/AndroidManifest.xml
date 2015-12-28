@@ -1,60 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bryan.studycodes" >
+    package="com.bryan.studycodes">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".MyApplication"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".largeimage.LargeImageSample"/>
-        <activity android:name=".activity.GridHeaderActivity"/>
-        <activity android:name=".activity.ProgressBarActivity"/>
-        <activity android:name=".activity.MeasureActivity"/>
-        <activity android:name=".activity.MoveActivity"/>
-        <activity android:name=".activity.MessengerActivity"/>
-        <activity android:name=".activity.BookManagerActivity"/>
-        <activity android:name=".activity.ImageLoaderActivity"/>
+        <activity android:name=".largeimage.LargeImageSample" />
+        <activity android:name=".activity.GridHeaderActivity" />
+        <activity android:name=".activity.ProgressBarActivity" />
+        <activity android:name=".activity.MeasureActivity" />
+        <activity android:name=".activity.MoveActivity" />
+        <activity android:name=".activity.MessengerActivity" />
+        <activity android:name=".activity.BookManagerActivity" />
+        <activity android:name=".activity.ImageLoaderActivity" />
         <activity
             android:name=".activity.CustomCameraActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.LetterActivity" />
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/appwidget_provider_info"
-                />
-                <intent-filter>
-                    <action android:name="com.bryan.studycodes.action.CLICK"></action>
-                    <!--这个action必需要-->
-                    <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
-                </intent-filter>
+                android:resource="@xml/appwidget_provider_info" />
+            <intent-filter>
+                <action android:name="com.bryan.studycodes.action.CLICK"></action>
+                <!--这个action必需要-->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+            </intent-filter>
         </receiver>
+
         <service
             android:name=".messenger.MessengerService"
-            android:process=":remote"
-            />
+            android:process=":remote" />
         <service
             android:name="com.bryan.aidl.BookManageService"
-            android:process=":remote"
-            />
+            android:process=":remote" />
     </application>
 
 </manifest>
