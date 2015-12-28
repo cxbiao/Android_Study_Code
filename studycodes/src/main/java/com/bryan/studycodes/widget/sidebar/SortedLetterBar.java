@@ -3,7 +3,7 @@
  * @Author：Cxb
  */
 
-package com.bryan.studycodes.widget.sortletter;
+package com.bryan.studycodes.widget.sidebar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,7 +15,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.bryan.studycodes.R;
 
@@ -23,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SideBar extends View {
+public class SortedLetterBar extends View {
 
 	public static String[] INDEX_STRING = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
@@ -33,28 +32,26 @@ public class SideBar extends View {
 	private List<String> indexStrings;
 	private int choose = -1;
 	private Paint paint = new Paint();
-	private TextView mTextDialog;
-
 	private int normalColor;
 	private int pressedColor;
 
 	private Rect indexBounds=new Rect();
 
 
-	public SideBar(Context context) {
+	public SortedLetterBar(Context context) {
 		this(context, null);
 	}
 
-	public SideBar(Context context, AttributeSet attrs) {
+	public SortedLetterBar(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public SideBar(Context context, AttributeSet attrs, int defStyle) {
+	public SortedLetterBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SideBar);
-		normalColor=ta.getColor(R.styleable.SideBar_normalColor,Color.TRANSPARENT);
-		pressedColor=ta.getColor(R.styleable.SideBar_pressedColor,Color.parseColor("#a1000000"));
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SortedLetterBar);
+		normalColor=ta.getColor(R.styleable.SortedLetterBar_normalColor,Color.TRANSPARENT);
+		pressedColor=ta.getColor(R.styleable.SortedLetterBar_pressedColor,Color.parseColor("#a1000000"));
 		ta.recycle();
 		indexStrings = Arrays.asList(INDEX_STRING);
 
@@ -115,11 +112,11 @@ public class SideBar extends View {
 		switch (action) {
 			case MotionEvent.ACTION_UP:
 				setBackgroundColor(normalColor);
+				if (listener != null) {
+					listener.onTouchingLetterUp(indexStrings.get(c));
+				}
 				choose = -1;
 				invalidate();
-				if (mTextDialog != null) {
-					mTextDialog.setVisibility(View.GONE);
-				}
 				break;
 			default:
 				setBackgroundColor(pressedColor);
@@ -127,10 +124,6 @@ public class SideBar extends View {
 					if (c >= 0 && c < indexStrings.size()) {
 						if (listener != null) {
 							listener.onTouchingLetterChanged(indexStrings.get(c));
-						}
-						if (mTextDialog != null) {
-							mTextDialog.setText(indexStrings.get(c));
-							mTextDialog.setVisibility(View.VISIBLE);
 						}
 
 						choose = c;
@@ -149,10 +142,6 @@ public class SideBar extends View {
 	}
 
 
-	public void setTextView(TextView mTextDialog) {
-		this.mTextDialog = mTextDialog;
-	}
-
 	public void setOnTouchingLetterChangedListener(
 			OnTouchingLetterChangedListener onTouchingLetterChangedListener) {
 		this.onTouchingLetterChangedListener = onTouchingLetterChangedListener;
@@ -160,6 +149,7 @@ public class SideBar extends View {
 
 	public interface OnTouchingLetterChangedListener {
 		void onTouchingLetterChanged(String s);
+		void onTouchingLetterUp(String s);
 	}
 
 }

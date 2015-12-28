@@ -22,8 +22,8 @@ import com.bryan.studycodes.adapter.SortAdapter;
 import com.bryan.studycodes.model.SortModel;
 import com.bryan.studycodes.utils.PinyinComparator;
 import com.bryan.studycodes.widget.ClearEditText;
-import com.bryan.studycodes.widget.sortletter.CharacterParser;
-import com.bryan.studycodes.widget.sortletter.SideBar;
+import com.bryan.studycodes.widget.sidebar.CharacterParser;
+import com.bryan.studycodes.widget.sidebar.SortedLetterBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class LetterActivity extends Activity {
 	private ListView sortListView;
-	private SideBar sideBar;
+	private SortedLetterBar sideBar;
 	private TextView dialog;
 	private SortAdapter adapter;
 	private ClearEditText mClearEditText;
@@ -61,21 +61,27 @@ public class LetterActivity extends Activity {
 
 		pinyinComparator = new PinyinComparator();
 
-		sideBar = (SideBar) findViewById(R.id.sidrbar);
+		sideBar = (SortedLetterBar) findViewById(R.id.sidrbar);
 		dialog = (TextView) findViewById(R.id.dialog);
-		sideBar.setTextView(dialog);
 
 		//设置右侧触摸监听
-		sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+		sideBar.setOnTouchingLetterChangedListener(new SortedLetterBar.OnTouchingLetterChangedListener() {
 
 			@Override
 			public void onTouchingLetterChanged(String s) {
+				dialog.setText(s);
+				dialog.setVisibility(View.VISIBLE);
 				//该字母首次出现的位置
 				int position = adapter.getPositionForSection(s.charAt(0));
 				if(position != -1){
 					sortListView.setSelection(position);
 				}
 
+			}
+
+			@Override
+			public void onTouchingLetterUp(String s) {
+				dialog.setVisibility(View.GONE);
 			}
 		});
 

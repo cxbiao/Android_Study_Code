@@ -9,7 +9,7 @@
  * @author	LuRuihui
  * @version	0.1
  */
-package com.bryan.studycodes.widget.sortletter;
+package com.bryan.studycodes.widget.sidebar;
 
 /**
  * Java汉字转换为拼音

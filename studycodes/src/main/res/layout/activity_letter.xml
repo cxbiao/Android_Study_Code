@@ -39,7 +39,7 @@
             android:textSize="30dp"
             android:visibility="invisible" />
 
-        <com.bryan.studycodes.widget.sortletter.SideBar
+        <com.bryan.studycodes.widget.sidebar.SortedLetterBar
             android:id="@+id/sidrbar"
             android:layout_width="30dp"
             android:layout_height="match_parent"
