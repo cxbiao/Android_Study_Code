@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bryan.studycodes.vdh.VDHLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="#44ff0000"
+        android:text="I can be dragged !"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#4400ff00"
+        android:text="Auto Back !"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#440000ff"
+        android:text="Edge Track!"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+</com.bryan.studycodes.vdh.VDHLayout>

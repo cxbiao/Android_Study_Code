@@ -33,6 +33,8 @@
             android:name=".activity.CustomCameraActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.LetterActivity" />
+        <activity android:name=".vdh.VDHActivity"/>
+        <activity android:name=".vdh.LeftDrawerLayoutActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
