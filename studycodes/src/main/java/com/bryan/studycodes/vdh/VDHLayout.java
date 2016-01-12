@@ -87,7 +87,7 @@ public class VDHLayout extends LinearLayout {
                 return (child==mEdgeTrackerView)?false:true;
             }
 
-            //控制水平方向移动的位置
+            //控制水平方向移动的位置,默认不能移动
             @Override
             public int clampViewPositionHorizontal(View child, int left, int dx) {
                 int leftBound=getPaddingLeft();
@@ -96,7 +96,7 @@ public class VDHLayout extends LinearLayout {
                 return newLeft;
             }
 
-            //控制竖起方向移动的位置
+            //控制竖起方向移动的位置 ,默认不能移动
             @Override
             public int clampViewPositionVertical(View child, int top, int dy) {
                 //只能水平移动  return child.getTop();

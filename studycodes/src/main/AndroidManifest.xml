@@ -28,7 +28,11 @@
         <activity android:name=".activity.MoveActivity" />
         <activity android:name=".activity.MessengerActivity" />
         <activity android:name=".activity.BookManagerActivity" />
-        <activity android:name=".activity.ImageLoaderActivity" />
+        <activity
+            android:name=".activity.ImageLoaderActivity"
+            android:theme="@style/AppTheme.TransparentActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activity.CustomCameraActivity"
             android:screenOrientation="portrait" />

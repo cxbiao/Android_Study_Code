@@ -5,18 +5,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import com.bryan.studycodes.adapter.ImageAdapter;
 import com.bryan.studycodes.R;
+import com.bryan.studycodes.adapter.ImageAdapter;
 import com.bryan.studycodes.image.ImageLoader;
+import com.bryan.studycodes.vdh.RevealBackgroundView;
+import com.bryan.studycodes.vdh.SwipeBackLayout;
 
 /**
  * Created by bryan on 2015-11-29.
+ * 带滑动返回
  */
-public class ImageLoaderActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
+public class ImageLoaderActivity extends AppCompatActivity implements AbsListView.OnScrollListener,RevealBackgroundView.OnStateChangeListener {
     public final static String[] imageUrls = new String[]{
             "http://news.xinhuanet.com/photo/2015-09/23/128257164_14429624216661n.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
@@ -111,12 +116,22 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
 
     ImageView img_http;
 
+
+    SwipeBackLayout swipeBackLayout;
+
+    RevealBackgroundView mRevealBackgroundView;
+
+    LinearLayout mContentView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageloader);
         gridView = (GridView) findViewById(R.id.gridview);
         img_http= (ImageView) findViewById(R.id.img_http);
+        swipeBackLayout= (SwipeBackLayout) findViewById(R.id.swipelayout);
+        mRevealBackgroundView= (RevealBackgroundView) findViewById(R.id.revealView);
+        mContentView= (LinearLayout) findViewById(R.id.contentView);
 
        //String file="file://"+ Environment.getExternalStorageDirectory().getAbsolutePath()+"/qq中国.jpg";
        String file="assets://qm.jpg";
@@ -127,7 +142,13 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
     //    mAdapter = new ImageAdapter(this, imageUrls);
       //  gridView.setAdapter(mAdapter);
        // gridView.setOnScrollListener(this);
-
+        swipeBackLayout.setCallBack(new SwipeBackLayout.CallBack() {
+            @Override
+            public void onFinish() {
+                finish();
+            }
+        });
+        setupRevealBackground();
 
     }
 
@@ -161,5 +182,30 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+    }
+
+    private void setupRevealBackground() {
+        mRevealBackgroundView.setOnStateChangeListener(this);
+        int screenWidth = this.getWindowManager().getDefaultDisplay().getWidth();
+        final int[] startingLocation = {screenWidth,0};
+        mRevealBackgroundView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mRevealBackgroundView.getViewTreeObserver().removeOnPreDrawListener(this);
+                mRevealBackgroundView.startFromLocation(startingLocation);
+                return true;
+            }
+        });
+
+    }
+
+    @Override
+    public void onStateChange(int state) {
+
+        if (RevealBackgroundView.STATE_FINISHED == state) {
+            mContentView.setVisibility(View.VISIBLE);
+        }else {
+            mContentView.setVisibility(View.INVISIBLE);
+        }
     }
 }
