@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +37,10 @@
         <activity
             android:name=".activity.CustomCameraActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.LetterActivity" />
+        <activity
+            android:name=".activity.LetterActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".vdh.VDHActivity"/>
         <activity android:name=".vdh.LeftDrawerLayoutActivity"/>
 

@@ -13,4 +13,8 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="AppTheme.Launcher" >
+        <item name="android:windowBackground">@drawable/main_bg</item>
+    </style>
+
 </resources>
