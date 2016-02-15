@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.bryan.aidl.Book;
@@ -23,7 +22,7 @@ import java.util.List;
 /**
  * Created by bryan on 2015-11-29.
  */
-public class BookManagerActivity extends AppCompatActivity {
+public class BookManagerActivity extends BaseActivity {
     private static final String TAG = "BookManagerActivity";
     private static final int MESSAGE_NEW_BOOK_ARRIVED=1;
 

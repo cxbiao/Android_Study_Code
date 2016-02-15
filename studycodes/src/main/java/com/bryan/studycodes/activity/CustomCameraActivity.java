@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * Created by bryan on 2015-12-05.
  */
-public class CustomCameraActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class CustomCameraActivity extends BaseActivity implements SurfaceHolder.Callback {
 
 
     private SurfaceView mSurfaceView;

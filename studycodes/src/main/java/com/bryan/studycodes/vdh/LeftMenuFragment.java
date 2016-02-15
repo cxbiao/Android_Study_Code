@@ -41,6 +41,7 @@ public class LeftMenuFragment extends ListFragment {
             menuItem = new MenuItem(getResources().getStringArray(R.array.array_left_menu)[i], false, R.drawable.music_36px, R.drawable.music_36px_light);
             mItems[i] = menuItem;
         }
+
     }
 
     @Override

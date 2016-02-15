@@ -5,7 +5,6 @@
 
 package com.bryan.studycodes.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -30,7 +29,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class LetterActivity extends Activity {
+public class LetterActivity extends BaseActivity {
 	private ListView sortListView;
 	private SortedLetterBar sideBar;
 	private TextView dialog;

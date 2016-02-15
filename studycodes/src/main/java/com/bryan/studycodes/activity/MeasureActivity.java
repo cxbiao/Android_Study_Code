@@ -1,7 +1,6 @@
 package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import com.bryan.studycodes.R;
  * Created by bryan on 2015-11-08.
  * 获取控件大小的4种方法
  */
-public class MeasureActivity extends AppCompatActivity {
+public class MeasureActivity extends BaseActivity {
 
     TextView tv1;
 

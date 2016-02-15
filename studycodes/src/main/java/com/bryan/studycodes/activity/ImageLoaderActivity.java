@@ -3,7 +3,6 @@ package com.bryan.studycodes.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
@@ -21,7 +20,7 @@ import com.bryan.studycodes.vdh.SwipeBackLayout;
  * Created by bryan on 2015-11-29.
  * 带滑动返回
  */
-public class ImageLoaderActivity extends AppCompatActivity implements AbsListView.OnScrollListener,RevealBackgroundView.OnStateChangeListener {
+public class ImageLoaderActivity extends BaseActivity implements AbsListView.OnScrollListener,RevealBackgroundView.OnStateChangeListener {
     public final static String[] imageUrls = new String[]{
             "http://news.xinhuanet.com/photo/2015-09/23/128257164_14429624216661n.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
@@ -139,9 +138,9 @@ public class ImageLoaderActivity extends AppCompatActivity implements AbsListVie
        ImageLoader.getInstance(this).bindBitmap(file,img_http,R.mipmap.ic_launcher);
        // ImageLoader.getInstance(this).bindBitmap("http://imgphoto.gmw.cn/attachement/jpg/site2/20120511/001d0918b5731116c4ff3d.jpg",img_http,R.mipmap.ic_launcher);
 
-    //    mAdapter = new ImageAdapter(this, imageUrls);
+       // mAdapter = new ImageAdapter(this, imageUrls);
       //  gridView.setAdapter(mAdapter);
-       // gridView.setOnScrollListener(this);
+      //  gridView.setOnScrollListener(this);
         swipeBackLayout.setCallBack(new SwipeBackLayout.CallBack() {
             @Override
             public void onFinish() {

@@ -7,18 +7,16 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 
 import com.bryan.studycodes.R;
+import com.bryan.studycodes.adapter.MainAdapter;
 import com.bryan.studycodes.largeimage.LargeImageSample;
 import com.bryan.studycodes.vdh.LeftDrawerLayoutActivity;
 import com.bryan.studycodes.vdh.VDHActivity;
@@ -29,7 +27,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * 在4.4 状态栏和toolbar会重叠,还没找到原因
+ */
+public class MainActivity extends BaseActivity {
 
     public static final String TAG="MainActivity";
 
@@ -40,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle drawerToggle;
     @Bind(R.id.navigation)
     NavigationView navigationView;
-    @Bind(R.id.listview)
-    ListView listview;
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    private List<String> title=new ArrayList<>();
+    MainAdapter mAdapter;
+    private List<String> titles =new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
     ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class};
@@ -57,14 +59,24 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         initTitle();
-        BaseAdapter adapter=new ArrayAdapter<String>(this,R.layout.activity_main_item,R.id.item_tv,title);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        mAdapter=new MainAdapter(this, titles);
+
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickLitener(new MainAdapter.OnItemClickLitener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(View view, int position) {
                 startActivity(new Intent(getBaseContext(), clazz[position]));
             }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
         });
+
 
 
     }
@@ -146,18 +158,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTitle() {
-        title.add("巨图展示");
-        title.add("带header的gridview");
-        title.add("各种进度条");
-        title.add("测量");
-        title.add("滑动");
-        title.add("messenger");
-        title.add("AIDL");
-        title.add("ImageLoader");
-        title.add("自定义相机");
-        title.add("SortLetter");
-        title.add("ViewDragHelper");
-        title.add("LeftDrawer");
+        titles.add("巨图展示");
+        titles.add("带header的gridview");
+        titles.add("各种进度条");
+        titles.add("测量");
+        titles.add("滑动");
+        titles.add("messenger");
+        titles.add("AIDL");
+        titles.add("ImageLoader");
+        titles.add("自定义相机");
+        titles.add("SortLetter");
+        titles.add("ViewDragHelper");
+        titles.add("LeftDrawer");
+
+
     }
 
     @Override

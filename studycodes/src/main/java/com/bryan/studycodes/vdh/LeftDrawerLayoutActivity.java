@@ -7,14 +7,16 @@ package com.bryan.studycodes.vdh;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bryan.studycodes.R;
+import com.bryan.studycodes.activity.BaseActivity;
 
-
-public class LeftDrawerLayoutActivity extends AppCompatActivity {
+/**
+ * 在4.4 状态栏和UI会重叠,还没找到原因
+ */
+public class LeftDrawerLayoutActivity extends BaseActivity {
 
     private LeftMenuFragment mMenuFragment;
     private LeftDrawerLayout mLeftDrawerLayout;

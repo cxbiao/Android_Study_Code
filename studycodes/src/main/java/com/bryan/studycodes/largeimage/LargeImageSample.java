@@ -5,17 +5,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bryan.studycodes.R;
+import com.bryan.studycodes.activity.BaseActivity;
 
 import java.io.InputStream;
 
 /**
  * Created by Administrator on 2015/10/22.
  */
-public class LargeImageSample extends AppCompatActivity {
+public class LargeImageSample extends BaseActivity {
 
     ImageView image;
 

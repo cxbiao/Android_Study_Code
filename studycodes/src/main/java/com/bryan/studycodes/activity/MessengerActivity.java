@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bryan.studycodes.Constant;
@@ -21,7 +20,7 @@ import com.bryan.studycodes.utils.KLog;
 /**
  * Created by bryan on 2015-11-22.
  */
-public class MessengerActivity extends AppCompatActivity {
+public class MessengerActivity extends BaseActivity {
 
 
 

@@ -1,7 +1,6 @@
 package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +13,7 @@ import com.bryan.studycodes.widget.GridViewWithHeaderAndFooter;
 /**
  * Created by Administrator on 2015/10/29.
  */
-public class GridHeaderActivity extends AppCompatActivity {
+public class GridHeaderActivity extends BaseActivity {
 
 
     GridViewWithHeaderAndFooter gridView;

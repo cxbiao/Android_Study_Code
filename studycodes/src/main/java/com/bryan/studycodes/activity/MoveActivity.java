@@ -1,7 +1,6 @@
 package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bryan.studycodes.R;
@@ -20,7 +19,7 @@ import com.bryan.studycodes.widget.MyButton;
  * 即从左向右滑动，mScrollX为负值，反之为正值
  * 从上往下滑动,mScrollY为负值，反之为正值
  */
-public class MoveActivity extends AppCompatActivity {
+public class MoveActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

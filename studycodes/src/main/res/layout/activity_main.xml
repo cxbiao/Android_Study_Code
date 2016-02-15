@@ -9,45 +9,51 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            />
-
-        <!--模仿微信的输入框-->
-        <EditText
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/weixin_et_bg" />
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <ListView
-            android:id="@+id/listview"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+        <!--模仿微信的输入框-->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@drawable/weixin_et_bg" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"
-            android:cacheColorHint="@android:color/transparent" />
-
-    </LinearLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="#f2f2f2"
+            />
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/navigation_drawer_items"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         android:tag="LEFT"
-        android:layout_gravity="start" />
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/navigation_drawer_items" />
 
 
 </android.support.v4.widget.DrawerLayout>
