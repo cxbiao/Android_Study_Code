@@ -3,7 +3,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="all">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/navItem1"
             android:icon="@drawable/ic_action_location_found_dark"
@@ -27,11 +27,9 @@
     <item android:title="Sub items">
         <menu>
             <item
-                android:checkable="true"
                 android:icon="@drawable/ic_action_location_found_dark"
                 android:title="Sub item 1"/>
             <item
-                android:checkable="true"
                 android:icon="@drawable/ic_action_location_found_dark"
                 android:title="Sub item 2"/>
         </menu>

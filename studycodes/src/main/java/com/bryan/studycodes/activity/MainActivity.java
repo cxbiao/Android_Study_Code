@@ -1,7 +1,6 @@
 package com.bryan.studycodes.activity;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -86,9 +85,6 @@ public class MainActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
 
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_location_found_dark);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open ,R.string.close);
@@ -150,12 +146,13 @@ public class MainActivity extends BaseActivity {
                         break;
                 }
                 drawerLayout.closeDrawer(Gravity.LEFT);
-                return false;
+                return true;
             }
         });
 
 
     }
+
 
     private void initTitle() {
         titles.add("巨图展示");
@@ -174,11 +171,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
