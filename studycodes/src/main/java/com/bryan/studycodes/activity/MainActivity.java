@@ -26,9 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * 在4.4 状态栏和toolbar会重叠,还没找到原因
- */
+
 public class MainActivity extends BaseActivity {
 
     public static final String TAG="MainActivity";

@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.activity.BaseActivity;
 
-/**
- * 在4.4 状态栏和UI会重叠,还没找到原因
- */
+
 public class LeftDrawerLayoutActivity extends BaseActivity {
 
     private LeftMenuFragment mMenuFragment;
