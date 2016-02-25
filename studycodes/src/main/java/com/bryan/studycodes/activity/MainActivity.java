@@ -2,6 +2,7 @@ package com.bryan.studycodes.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,8 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+    @Bind(R.id.fabBtn)
+    FloatingActionButton fabBtn;
 
     MainAdapter mAdapter;
     private List<String> titles =new ArrayList<>();
@@ -87,43 +90,45 @@ public class MainActivity extends BaseActivity {
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open ,R.string.close);
         drawerToggle.syncState();
-      //  drawerLayout.setDrawerListener(drawerToggle);
-
-        drawerLayout.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                View mContent = drawerLayout.getChildAt(0);
-                View mMenu = drawerView;
-                float scale = 1 - slideOffset;
-                float rightScale = 0.8f + scale * 0.2f;
-
-                if (drawerView.getTag().equals("LEFT"))
-                {
-
-                    float leftScale = 1 - 0.3f * scale;
-
-                    mMenu.setScaleX(leftScale);
-                    mMenu.setScaleY(leftScale);
-                    mMenu.setAlpha( 0.6f + 0.4f * (1 - scale));
-                    mContent.setTranslationX(mMenu.getMeasuredWidth() * (1 - scale));
-                    mContent.setPivotX( 0);
-                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
-                    mContent.invalidate();
-                    mContent.setScaleX(rightScale);
-                    mContent.setScaleY( rightScale);
-                } else
-                {
-                    mContent.setTranslationX(-mMenu.getMeasuredWidth() * slideOffset);
-                    mContent.setPivotX( mContent.getMeasuredWidth());
-                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
-                    mContent.invalidate();
-                    mContent.setScaleX( rightScale);
-                    mContent.setScaleY(rightScale);
-                }
-            }
+       drawerLayout.setDrawerListener(drawerToggle);
 
 
-        });
+//类似QQ的侧滑缩放在与fabbtn滑动联动时有问题，研究中
+//        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+//            @Override
+//            public void onDrawerSlide(View drawerView, float slideOffset) {
+//                View mContent = drawerLayout.getChildAt(0);
+//                View mMenu = drawerView;
+//                float scale = 1 - slideOffset;
+//                float rightScale = 0.8f + scale * 0.2f;
+//
+//                if (drawerView.getTag().equals("LEFT"))
+//                {
+//
+//                    float leftScale = 1 - 0.3f * scale;
+//
+//                    mMenu.setScaleX(leftScale);
+//                    mMenu.setScaleY(leftScale);
+//                    mMenu.setAlpha( 0.6f + 0.4f * (1 - scale));
+//                    mContent.setTranslationX(mMenu.getMeasuredWidth() * (1 - scale));
+//                    mContent.setPivotX( 0);
+//                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
+//                    mContent.invalidate();
+//                    mContent.setScaleX(rightScale);
+//                    mContent.setScaleY( rightScale);
+//                } else
+//                {
+//                    mContent.setTranslationX(-mMenu.getMeasuredWidth() * slideOffset);
+//                    mContent.setPivotX( mContent.getMeasuredWidth());
+//                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
+//                    mContent.invalidate();
+//                    mContent.setScaleX( rightScale);
+//                    mContent.setScaleY(rightScale);
+//                }
+//            }
+//
+//
+//        });
         navigationView= (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -131,20 +136,33 @@ public class MainActivity extends BaseActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navItem1:
-                        Snackbar.make(navigationView, "item1", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(fabBtn, "item1", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.navItem2:
-                        Snackbar.make(navigationView, "item2", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(fabBtn, "item2", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.navItem3:
-                        Snackbar.make(navigationView, "item3", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(fabBtn, "item3", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.navItem4:
-                        Snackbar.make(navigationView, "item4", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(fabBtn, "item4", Snackbar.LENGTH_SHORT).show();
                         break;
                 }
                 drawerLayout.closeDrawer(Gravity.LEFT);
                 return true;
+            }
+        });
+
+        fabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "这是一个snackbar...", Snackbar.LENGTH_SHORT)
+                        .setAction("点击", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                System.out.println("action;click");
+                            }
+                        }).show();
             }
         });
 
@@ -167,8 +185,17 @@ public class MainActivity extends BaseActivity {
         titles.add("LeftDrawer");
 
 
-    }
 
+
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

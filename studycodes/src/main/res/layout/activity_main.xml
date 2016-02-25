@@ -45,8 +45,27 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="#f2f2f2"
             />
+
+
+        <android.support.design.widget.FloatingActionButton
+
+            android:id="@+id/fabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginRight="@dimen/fab_margin_right"
+            android:src="@drawable/ic_plus"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_behavior="com.bryan.studycodes.widget.ScrollAwareFABBehavior"
+            />
     </android.support.design.widget.CoordinatorLayout>
 
+
+    <!--app:itemIconTint="#333"-->
+    <!--app:itemTextColor="#333"-->
+    <!--改NavigationView的item字体颜色和图标颜色-->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
