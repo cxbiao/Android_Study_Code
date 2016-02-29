@@ -6,4 +6,8 @@
     <dimen name="fab_margin_bottom">16dp</dimen>
     <dimen name="nav_header_text_margin_left">16dp</dimen>
     <dimen name="nav_header_height">192dp</dimen>
+
+    <!-- 解决5.0以下cardview margin边距问题-->
+    <dimen name="cardview_margin_top">0dp</dimen>
+    <dimen name="cardview_margin_bottom">0dp</dimen>
 </resources>

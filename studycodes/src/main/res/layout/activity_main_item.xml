@@ -8,15 +8,18 @@
 
     >
 
+    <!--android:foreground="?attr/selectableItemBackground"-->
+    <!--Ripple效果 5.0以上-->
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginTop="@dimen/cardview_margin_top"
+        android:layout_marginBottom="@dimen/cardview_margin_bottom"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:cardBackgroundColor="@android:color/white"

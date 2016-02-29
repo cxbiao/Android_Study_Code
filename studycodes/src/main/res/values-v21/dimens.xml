@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="cardview_margin_top">3dp</dimen>
+    <dimen name="cardview_margin_bottom">3dp</dimen>
+</resources>
