@@ -90,45 +90,44 @@ public class MainActivity extends BaseActivity {
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open ,R.string.close);
         drawerToggle.syncState();
-       drawerLayout.setDrawerListener(drawerToggle);
+       //drawerLayout.addDrawerListener(drawerToggle);
 
 
-//类似QQ的侧滑缩放在与fabbtn滑动联动时有问题，研究中
-//        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-//            @Override
-//            public void onDrawerSlide(View drawerView, float slideOffset) {
-//                View mContent = drawerLayout.getChildAt(0);
-//                View mMenu = drawerView;
-//                float scale = 1 - slideOffset;
-//                float rightScale = 0.8f + scale * 0.2f;
-//
-//                if (drawerView.getTag().equals("LEFT"))
-//                {
-//
-//                    float leftScale = 1 - 0.3f * scale;
-//
-//                    mMenu.setScaleX(leftScale);
-//                    mMenu.setScaleY(leftScale);
-//                    mMenu.setAlpha( 0.6f + 0.4f * (1 - scale));
-//                    mContent.setTranslationX(mMenu.getMeasuredWidth() * (1 - scale));
-//                    mContent.setPivotX( 0);
-//                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
-//                    mContent.invalidate();
-//                    mContent.setScaleX(rightScale);
-//                    mContent.setScaleY( rightScale);
-//                } else
-//                {
-//                    mContent.setTranslationX(-mMenu.getMeasuredWidth() * slideOffset);
-//                    mContent.setPivotX( mContent.getMeasuredWidth());
-//                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
-//                    mContent.invalidate();
-//                    mContent.setScaleX( rightScale);
-//                    mContent.setScaleY(rightScale);
-//                }
-//            }
-//
-//
-//        });
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                View mContent = drawerLayout.getChildAt(0);
+                View mMenu = drawerView;
+                float scale = 1 - slideOffset;
+                float rightScale = 0.8f + scale * 0.2f;
+
+                if (drawerView.getTag().equals("LEFT"))
+                {
+
+                    float leftScale = 1 - 0.3f * scale;
+
+                    mMenu.setScaleX(leftScale);
+                    mMenu.setScaleY(leftScale);
+                    mMenu.setAlpha( 0.6f + 0.4f * (1 - scale));
+                    mContent.setTranslationX(mMenu.getMeasuredWidth() * (1 - scale));
+                    mContent.setPivotX( 0);
+                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
+                    mContent.invalidate();
+                    mContent.setScaleX(rightScale);
+                    mContent.setScaleY( rightScale);
+                } else
+                {
+                    mContent.setTranslationX(-mMenu.getMeasuredWidth() * slideOffset);
+                    mContent.setPivotX( mContent.getMeasuredWidth());
+                    mContent.setPivotY(mContent.getMeasuredHeight() / 2);
+                    mContent.invalidate();
+                    mContent.setScaleX( rightScale);
+                    mContent.setScaleY(rightScale);
+                }
+            }
+
+
+        });
         navigationView= (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -183,7 +182,6 @@ public class MainActivity extends BaseActivity {
         titles.add("SortLetter");
         titles.add("ViewDragHelper");
         titles.add("LeftDrawer");
-
 
 
 
