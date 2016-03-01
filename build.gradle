@@ -18,6 +18,12 @@ allprojects {
     }
 }
 
+
+ext {
+    supportVersion = '23.2.0'
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
