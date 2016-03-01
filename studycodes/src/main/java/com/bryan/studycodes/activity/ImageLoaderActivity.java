@@ -186,7 +186,8 @@ public class ImageLoaderActivity extends BaseActivity implements AbsListView.OnS
     private void setupRevealBackground() {
         mRevealBackgroundView.setOnStateChangeListener(this);
         int screenWidth = this.getWindowManager().getDefaultDisplay().getWidth();
-        final int[] startingLocation = {screenWidth,0};
+        int screenHeight=this.getWindowManager().getDefaultDisplay().getHeight();
+        final int[] startingLocation = {screenWidth,screenHeight};
         mRevealBackgroundView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
