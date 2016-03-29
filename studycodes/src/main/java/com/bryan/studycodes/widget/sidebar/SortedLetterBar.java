@@ -37,6 +37,8 @@ public class SortedLetterBar extends View {
 
 	private Rect indexBounds=new Rect();
 
+	private static  final int letterSize=13;
+
 
 	public SortedLetterBar(Context context) {
 		this(context, null);
@@ -70,7 +72,7 @@ public class SortedLetterBar extends View {
 			paint.setColor(Color.rgb(33, 65, 98));
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setAntiAlias(true);
-			paint.setTextSize(24);
+			paint.setTextSize(letterSize*getResources().getDisplayMetrics().scaledDensity);
 			if (i == choose) {
 				paint.setColor(Color.parseColor("#3399ff"));
 				paint.setFakeBoldText(true);
