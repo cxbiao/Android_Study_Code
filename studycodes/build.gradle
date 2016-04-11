@@ -4,13 +4,27 @@ android {
     buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
-        generatedDensities = []
         applicationId "com.bryan.studycodes"
         minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
+
+        // Gradle Plugin 1.5
+        // disable limited support for vector drawables fro Android Studio 1.4
+        //generatedDensities = []
+
+        // Gradle Plugin 2.0
+        // disable limited support for vector drawables fro Android Studio 1.4
+         vectorDrawables.useSupportLibrary = true
     }
+
+    // Gradle Plugin 1.5
+    // disable limited support for vector drawables fro Android Studio 1.4
+//    aaptOptions {
+//        additionalParameters "--no-version-vectors"
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -18,9 +32,10 @@ android {
         }
     }
 
-    aaptOptions {
-        additionalParameters "--no-version-vectors"
+    lintOptions {
+        abortOnError false
     }
+
 }
 
 dependencies {
