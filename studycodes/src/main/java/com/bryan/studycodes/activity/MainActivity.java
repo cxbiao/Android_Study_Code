@@ -201,7 +201,10 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-
+//    @Override
+//    protected void setStatusBar() {
+//        StatusBarUtil.setColorForDrawerLayout(this, (DrawerLayout) findViewById(R.id.drawerLayout), getResources().getColor(R.color.colorPrimary), 0);
+//    }
 
 
 

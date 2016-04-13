@@ -26,7 +26,7 @@ public class LeftDrawerLayoutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_left_drawer_layout);
 
-        mLeftDrawerLayout = (LeftDrawerLayout) findViewById(R.id.id_drawerlayout);
+        mLeftDrawerLayout = (LeftDrawerLayout) findViewById(R.id.drawerLayout);
         mContentTv = (TextView) findViewById(R.id.id_content_tv);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -49,6 +49,8 @@ public class LeftDrawerLayoutActivity extends BaseActivity {
     public void back(View v){
         mLeftDrawerLayout.closeDrawer();
     }
+
+
 
 
 }
