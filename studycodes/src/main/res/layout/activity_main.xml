@@ -70,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="false"
         android:tag="LEFT"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/navigation_drawer_items" />
