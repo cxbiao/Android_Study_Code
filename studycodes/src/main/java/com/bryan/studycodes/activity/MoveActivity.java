@@ -19,7 +19,7 @@ import com.bryan.studycodes.widget.MyButton;
  * 即从左向右滑动，mScrollX为负值，反之为正值
  * 从上往下滑动,mScrollY为负值，反之为正值
  */
-public class MoveActivity extends BaseActivity {
+public class MoveActivity extends TitleBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class MoveActivity extends BaseActivity {
 
             }
         });
+
+        setHeaderTitle("滑动");
     }
 
     /**

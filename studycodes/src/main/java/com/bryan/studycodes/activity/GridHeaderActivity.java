@@ -13,7 +13,7 @@ import com.bryan.studycodes.widget.GridViewWithHeaderAndFooter;
 /**
  * Created by Administrator on 2015/10/29.
  */
-public class GridHeaderActivity extends BaseActivity {
+public class GridHeaderActivity extends TitleBaseActivity {
 
 
     GridViewWithHeaderAndFooter gridView;
@@ -34,6 +34,8 @@ public class GridHeaderActivity extends BaseActivity {
                 Toast.makeText(getBaseContext(),position+"",Toast.LENGTH_SHORT).show();
             }
         });
+
+        setHeaderTitle("带头尾的GridView");
     }
 
 

@@ -16,7 +16,7 @@
     </style>
 
     <style name="AppTheme.Launcher" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/main_bg</item>
+        <item name="android:windowBackground">@mipmap/main_bg</item>
     </style>
 
 </resources>

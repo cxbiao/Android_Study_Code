@@ -10,4 +10,7 @@
     <!-- 解决5.0以下cardview margin边距问题-->
     <dimen name="cardview_margin_top">0dp</dimen>
     <dimen name="cardview_margin_bottom">0dp</dimen>
+
+
+    <dimen name="height_top_bar">48dp</dimen>
 </resources>

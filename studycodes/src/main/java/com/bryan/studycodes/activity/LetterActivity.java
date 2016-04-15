@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class LetterActivity extends BaseActivity {
+public class LetterActivity extends TitleBaseActivity {
 	private ListView sortListView;
 	private SortedLetterBar sideBar;
 	private TextView dialog;
@@ -52,6 +52,7 @@ public class LetterActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_letter);
 		initViews();
+		setHeaderTitle("字母导航条");
 	}
 
 	private void initViews() {

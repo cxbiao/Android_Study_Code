@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.activity.BaseActivity;
+import com.bryan.studycodes.activity.TitleBaseActivity;
 
 
-public class LeftDrawerLayoutActivity extends BaseActivity {
+public class LeftDrawerLayoutActivity extends TitleBaseActivity {
 
     private LeftMenuFragment mMenuFragment;
     private LeftDrawerLayout mLeftDrawerLayout;
@@ -43,6 +43,7 @@ public class LeftDrawerLayoutActivity extends BaseActivity {
             }
         });
 
+        setHeaderTitle("自定义DrawerLayout");
 
     }
 

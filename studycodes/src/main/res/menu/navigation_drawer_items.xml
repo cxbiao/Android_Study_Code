@@ -6,31 +6,31 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navItem1"
-            android:icon="@drawable/ic_action_location_found_dark"
+            android:icon="@mipmap/ic_action_location_found_dark"
             android:title="Home"/>
         <item
             android:id="@+id/navItem2"
-            android:icon="@drawable/ic_action_location_found_dark"
+            android:icon="@mipmap/ic_action_location_found_dark"
             android:title="Blog"/>
 
         <item
             android:id="@+id/navItem3"
-            android:icon="@drawable/ic_action_location_found_dark"
+            android:icon="@mipmap/ic_action_location_found_dark"
             android:title="About"/>
 
         <item
             android:id="@+id/navItem4"
-            android:icon="@drawable/ic_action_location_found_dark"
+            android:icon="@mipmap/ic_action_location_found_dark"
             android:title="Contact"/>
     </group>
 
     <item android:title="Sub items">
         <menu>
             <item
-                android:icon="@drawable/ic_action_location_found_dark"
+                android:icon="@mipmap/ic_action_location_found_dark"
                 android:title="Sub item 1"/>
             <item
-                android:icon="@drawable/ic_action_location_found_dark"
+                android:icon="@mipmap/ic_action_location_found_dark"
                 android:title="Sub item 2"/>
         </menu>
     </item>

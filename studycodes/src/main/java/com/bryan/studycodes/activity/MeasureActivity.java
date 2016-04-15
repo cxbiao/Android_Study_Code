@@ -11,7 +11,7 @@ import com.bryan.studycodes.R;
  * Created by bryan on 2015-11-08.
  * 获取控件大小的4种方法
  */
-public class MeasureActivity extends BaseActivity {
+public class MeasureActivity extends TitleBaseActivity {
 
     TextView tv1;
 
@@ -22,7 +22,7 @@ public class MeasureActivity extends BaseActivity {
 
         tv1 = (TextView) findViewById(R.id.tv1);
 
-
+        setHeaderTitle("测量时机");
 
        // measure2();
          measure3();

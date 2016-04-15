@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by bryan on 2015-12-05.
  */
-public class CustomCameraActivity extends BaseActivity implements SurfaceHolder.Callback {
+public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHolder.Callback {
 
 
     private SurfaceView mSurfaceView;
@@ -77,6 +77,8 @@ public class CustomCameraActivity extends BaseActivity implements SurfaceHolder.
                 capture();
             }
         });
+
+        setHeaderTitle("相机");
 
 
     }

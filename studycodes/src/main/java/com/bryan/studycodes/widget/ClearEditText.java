@@ -49,7 +49,7 @@ public class ClearEditText extends EditText implements
         mClearDrawable = getCompoundDrawables()[2];
         if (mClearDrawable == null) {
             mClearDrawable = getResources()
-                    .getDrawable(R.drawable.search_bar_edit_cancelbtn);
+                    .getDrawable(R.mipmap.search_bar_edit_cancelbtn);
         }
         mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
         setClearIconVisible(false);

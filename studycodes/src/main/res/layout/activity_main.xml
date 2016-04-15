@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
+    android:background="@mipmap/main_bg"
     tools:context=".activity.MainActivity">
 
 
@@ -54,7 +54,7 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="@dimen/fab_margin_bottom"
             android:layout_marginRight="@dimen/fab_margin_right"
-            android:src="@drawable/ic_plus"
+            android:src="@mipmap/ic_plus"
             app:borderWidth="0dp"
             app:fabSize="normal"
             app:layout_behavior="com.bryan.studycodes.widget.ScrollAwareFABBehavior"

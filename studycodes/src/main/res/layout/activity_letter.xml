@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/frame_title_header"
+        layout="@layout/header_bar"/>
+
     <com.bryan.studycodes.widget.ClearEditText
         android:id="@+id/filter_edit"
         android:layout_marginTop="5dip"
@@ -12,7 +16,7 @@
         android:background="@drawable/search_bar_edit_selector"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:drawableLeft="@drawable/search_bar_icon_normal"
+        android:drawableLeft="@mipmap/search_bar_icon_normal"
         android:hint="请输入关键字"
         android:singleLine="true"
         android:textSize="15dp" />

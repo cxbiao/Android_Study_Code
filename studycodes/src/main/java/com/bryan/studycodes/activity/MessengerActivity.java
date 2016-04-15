@@ -20,7 +20,7 @@ import com.bryan.studycodes.utils.KLog;
 /**
  * Created by bryan on 2015-11-22.
  */
-public class MessengerActivity extends BaseActivity {
+public class MessengerActivity extends TitleBaseActivity {
 
 
 
@@ -56,6 +56,8 @@ public class MessengerActivity extends BaseActivity {
         setContentView(R.layout.activity_messenger);
         Intent intent=new Intent(this, MessengerService.class);
         bindService(intent,mConn, Context.BIND_AUTO_CREATE);
+        setHeaderTitle("Messenger");
+
     }
 
     public void bind(View v){

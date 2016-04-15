@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+   <include
+       android:id="@+id/frame_title_header"
+       layout="@layout/header_bar"/>
+
    <com.bryan.studycodes.widget.GridViewWithHeaderAndFooter
        android:id="@+id/gridview"
        android:layout_width="match_parent"

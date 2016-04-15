@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="state_menu_item_selected">#44009688</color>
+    <color name="title_bar">@android:color/white</color>
 </resources>

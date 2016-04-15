@@ -8,14 +8,14 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.activity.BaseActivity;
+import com.bryan.studycodes.activity.TitleBaseActivity;
 
 import java.io.InputStream;
 
 /**
  * Created by Administrator on 2015/10/22.
  */
-public class LargeImageSample extends BaseActivity {
+public class LargeImageSample extends TitleBaseActivity {
 
     ImageView image;
 
@@ -47,5 +47,9 @@ public class LargeImageSample extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        setHeaderTitle("大图展示");
     }
+
+
 }

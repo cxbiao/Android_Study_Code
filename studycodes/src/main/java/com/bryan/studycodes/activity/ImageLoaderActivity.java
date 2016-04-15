@@ -20,7 +20,7 @@ import com.bryan.studycodes.vdh.SwipeBackLayout;
  * Created by bryan on 2015-11-29.
  * 带滑动返回
  */
-public class ImageLoaderActivity extends BaseActivity implements AbsListView.OnScrollListener,RevealBackgroundView.OnStateChangeListener {
+public class ImageLoaderActivity extends TitleBaseActivity implements AbsListView.OnScrollListener,RevealBackgroundView.OnStateChangeListener {
     public final static String[] imageUrls = new String[]{
             "http://news.xinhuanet.com/photo/2015-09/23/128257164_14429624216661n.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
@@ -148,6 +148,8 @@ public class ImageLoaderActivity extends BaseActivity implements AbsListView.OnS
             }
         });
         setupRevealBackground();
+
+        setHeaderTitle("图片加载");
 
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by bryan on 2015-11-29.
  */
-public class BookManagerActivity extends BaseActivity {
+public class BookManagerActivity extends TitleBaseActivity {
     private static final String TAG = "BookManagerActivity";
     private static final int MESSAGE_NEW_BOOK_ARRIVED=1;
 
@@ -95,6 +95,8 @@ public class BookManagerActivity extends BaseActivity {
         setContentView(R.layout.activity_book_manager);
         Intent intent=new Intent(this, BookManageService.class);
         bindService(intent,conn,BIND_AUTO_CREATE);
+
+        setHeaderTitle("AIDL");
     }
 
     @Override
