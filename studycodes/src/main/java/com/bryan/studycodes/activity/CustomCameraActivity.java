@@ -89,7 +89,7 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
         Camera.Size size = mCamera.getParameters().getPictureSize();
         List<Camera.Size> listSize = parameters.getSupportedPictureSizes();
         parameters.setPictureFormat(ImageFormat.JPEG);
-        parameters.setPictureSize(1840, 3264);
+        parameters.setPictureSize(listSize.get(listSize.size()-1).width,listSize.get(listSize.size()-1).height);
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         mCamera.setParameters(parameters);
         size = mCamera.getParameters().getPictureSize();
