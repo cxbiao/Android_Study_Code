@@ -1,9 +1,12 @@
 package com.bryan.studycodes.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -12,6 +15,11 @@ import android.widget.Toast;
 
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.utils.KLog;
+import com.bryan.studycodes.utils.PermissionCode;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+import com.zhy.m.permission.ShowRequestPermissionRationale;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,6 +37,8 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
     private int frontCamera = 0;// 0是后置摄像头，1是前置摄像头
     private Button btn_capture;
     private Button btn_switch;
+
+    private boolean IsCameraGranted=false;
 
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
         @Override
@@ -54,6 +64,11 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_camera);
+
+        if(!MPermissions.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA,PermissionCode.REQUEST_CAMERA)){
+            MPermissions.requestPermissions(this, PermissionCode.REQUEST_CAMERA, Manifest.permission.CAMERA);
+        }
+
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         btn_switch = (Button) findViewById(R.id.btn_switch);
         btn_capture= (Button) findViewById(R.id.btn_capture);
@@ -83,6 +98,35 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
 
     }
 
+    @ShowRequestPermissionRationale(PermissionCode.REQUEST_CAMERA)
+    public void whyNeedCamera(){
+        new  AlertDialog.Builder(this)
+                .setMessage("需要相机访问权限")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MPermissions.requestPermissions(CustomCameraActivity.this,PermissionCode.REQUEST_CAMERA, Manifest.permission.CAMERA);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getBaseContext(), "用户拒绝授权!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+    }
+
+    @PermissionGrant(PermissionCode.REQUEST_CAMERA)
+    public void requestCameraSuccess(){
+        IsCameraGranted=true;
+        Toast.makeText(this, "授权成功!", Toast.LENGTH_SHORT).show();
+    }
+    @PermissionDenied(PermissionCode.REQUEST_CAMERA)
+    public void requestCameraFail(){
+        IsCameraGranted=false;
+        Toast.makeText(this, "用户拒绝授权!", Toast.LENGTH_SHORT).show();
+    }
 
     private void initCamera(){
         Camera.Parameters parameters = mCamera.getParameters();
@@ -148,6 +192,7 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
     }
 
     private void setStartPrieview(Camera camera, SurfaceHolder holder) {
+        if(camera==null) return;
         try {
             camera.setPreviewDisplay(holder);
             //将camera预览角度进行调整，默认横屏
@@ -176,7 +221,7 @@ public class CustomCameraActivity extends TitleBaseActivity implements SurfaceHo
     protected void onResume() {
         KLog.e("onResume");
         super.onResume();
-        if (mCamera == null) {
+        if (mCamera == null && IsCameraGranted) {
             mCamera = getCamera();
             initCamera();
             if (mHolder != null) {

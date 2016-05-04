@@ -1,20 +1,29 @@
 package com.bryan.studycodes.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.adapter.ImageAdapter;
 import com.bryan.studycodes.image.ImageLoader;
+import com.bryan.studycodes.utils.PermissionCode;
 import com.bryan.studycodes.vdh.RevealBackgroundView;
 import com.bryan.studycodes.vdh.SwipeBackLayout;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
+import com.zhy.m.permission.ShowRequestPermissionRationale;
 
 /**
  * Created by bryan on 2015-11-29.
@@ -155,8 +164,42 @@ public class ImageLoaderActivity extends TitleBaseActivity implements AbsListVie
 
 
     public  void onPic(View v){
+        if(!MPermissions.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionCode.REQUEST_SDCARD)){
+            MPermissions.requestPermissions(this,PermissionCode.REQUEST_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+    }
+
+    @ShowRequestPermissionRationale(PermissionCode.REQUEST_SDCARD)
+    public void whyNeedCard(){
+        new  AlertDialog.Builder(this)
+                .setMessage("需要SD卡访问权限")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MPermissions.requestPermissions(ImageLoaderActivity.this,PermissionCode.REQUEST_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getBaseContext(), "用户拒绝授权!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+
+    }
+
+    @PermissionGrant(PermissionCode.REQUEST_SDCARD)
+    public void requestSdcardSuccess() {
+        Toast.makeText(this, "授权成功!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*");
         startActivityForResult(intent,3);
+    }
+
+    @PermissionDenied(PermissionCode.REQUEST_SDCARD)
+    public void requestSdcardFailed() {
+        Toast.makeText(this, "用户拒绝授权!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
