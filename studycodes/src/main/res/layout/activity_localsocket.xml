@@ -12,8 +12,8 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="send"
-        android:text="send"
+        android:onClick="startServer"
+        android:text="startServer"
         android:textAllCaps="false"
         />
 
@@ -21,8 +21,17 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="stop"
-        android:text="stop"
+        android:onClick="clientSend"
+        android:text="clientSend"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="stopClient"
+        android:text="stopClient"
         android:textAllCaps="false"
         />
 
