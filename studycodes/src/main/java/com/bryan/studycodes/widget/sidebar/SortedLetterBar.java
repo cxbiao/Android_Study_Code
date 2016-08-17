@@ -104,39 +104,39 @@ public class SortedLetterBar extends View {
 	}
 
 	@Override
-	public boolean dispatchTouchEvent(MotionEvent event) {
-		final int action = event.getAction();
-		final float y = event.getY();
-		final int oldChoose = choose;
-		final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
-		final int c = (int) (y / getHeight() * indexStrings.size());
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        final int action = event.getAction();
+        final float y = event.getY();
+        final int oldChoose = choose;
+        final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
+        final int c = (int) (y / getHeight() * indexStrings.size());
+       int index=c>=indexStrings.size()?indexStrings.size()-1:c;
+        switch (action) {
+            case MotionEvent.ACTION_UP:
+                setBackgroundColor(normalColor);
+                if (listener != null) {
+                    listener.onTouchingLetterUp(indexStrings.get(index));
+                }
+                choose = -1;
+                invalidate();
+                break;
+            default:
+                setBackgroundColor(pressedColor);
+                if (oldChoose != c) {
+                    if (c >= 0 && c < indexStrings.size()) {
+                        if (listener != null) {
+                            listener.onTouchingLetterChanged(indexStrings.get(index));
+                        }
 
-		switch (action) {
-			case MotionEvent.ACTION_UP:
-				setBackgroundColor(normalColor);
-				if (listener != null) {
-					listener.onTouchingLetterUp(indexStrings.get(c));
-				}
-				choose = -1;
-				invalidate();
-				break;
-			default:
-				setBackgroundColor(pressedColor);
-				if (oldChoose != c) {
-					if (c >= 0 && c < indexStrings.size()) {
-						if (listener != null) {
-							listener.onTouchingLetterChanged(indexStrings.get(c));
-						}
+                        choose = c;
+                        invalidate();
+                    }
+                }
 
-						choose = c;
-						invalidate();
-					}
-				}
-
-				break;
-		}
-		return true;
-	}
+                break;
+        }
+        return true;
+    }
 
 	public void setIndexText(List<String> indexStrings) {
 		this.indexStrings = indexStrings;
