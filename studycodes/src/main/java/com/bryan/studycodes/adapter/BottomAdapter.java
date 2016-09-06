@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * Author：Cxb on 2016/2/15 14:46
  */
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
+public class BottomAdapter extends RecyclerView.Adapter<BottomAdapter.MyHolder> {
 
 
     private Context context;
     private List<String> data = new ArrayList<>();
 
-    public MainAdapter(Context context, List data) {
+    public BottomAdapter(Context context, List data) {
         this.context=context;
         this.data = data;
     }
@@ -30,7 +30,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
     public interface OnItemClickLitener
     {
         void onItemClick(View view, int position);
-        void onItemLongClick(View view , int position);
+        void onItemLongClick(View view, int position);
     }
 
     private OnItemClickLitener mOnItemClickLitener;
@@ -41,13 +41,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
     }
 
     @Override
-    public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MainHolder holder=new MainHolder(LayoutInflater.from(context).inflate(R.layout.recycler_main_item, parent, false));
+    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        MyHolder holder=new MyHolder(LayoutInflater.from(context).inflate(R.layout.recycler_bottom_item, parent, false));
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(final MainHolder holder, int position) {
+    public void onBindViewHolder(final MyHolder holder, int position) {
          String title=data.get(position);
          holder.tv_title.setText(title);
         // 如果设置了回调，则设置点击事件
@@ -82,11 +82,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
         return data.size();
     }
 
-    static class MainHolder extends RecyclerView.ViewHolder {
+    static class MyHolder extends RecyclerView.ViewHolder {
 
         private TextView tv_title;
 
-        public MainHolder(View itemView) {
+        public MyHolder(View itemView) {
             super(itemView);
             tv_title= (TextView) itemView.findViewById(R.id.tv_title);
         }

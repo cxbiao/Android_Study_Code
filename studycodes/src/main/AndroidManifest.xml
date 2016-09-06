@@ -45,6 +45,7 @@
         <activity android:name=".vdh.VDHActivity"/>
         <activity android:name=".vdh.LeftDrawerLayoutActivity"/>
         <activity android:name=".activity.LocalSocketActivity"/>
+        <activity android:name=".activity.BottomSheetActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
