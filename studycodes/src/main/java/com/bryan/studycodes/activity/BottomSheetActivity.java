@@ -70,13 +70,17 @@ public class BottomSheetActivity extends AppCompatActivity {
     }
 
     public  void sheetD(View v){
-        RecyclerView recyclerView=new RecyclerView(this);
+
+        View contentView=View.inflate(this,R.layout.dialog_bottom,null);
+        RecyclerView recyclerView= (RecyclerView) contentView.findViewById(R.id.recyclerView);
         BottomAdapter adapter=new BottomAdapter(this,data);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setNestedScrollingEnabled(false);  //禁止recyclerview在NestedScrollView中滚动
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
         final BottomSheetDialog dialog=new BottomSheetDialog(this);
-        dialog.setContentView(recyclerView);
+        dialog.setContentView(contentView);
         dialog.show();
 
         adapter.setOnItemClickLitener(new BottomAdapter.OnItemClickLitener() {
