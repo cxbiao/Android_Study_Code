@@ -46,6 +46,9 @@
         <activity android:name=".vdh.LeftDrawerLayoutActivity"/>
         <activity android:name=".activity.LocalSocketActivity"/>
         <activity android:name=".activity.BottomSheetActivity"/>
+        <activity android:name=".activity.FrescoActivity"/>
+        <activity android:name=".activity.FrescoSingleActivity"/>
+        <activity android:name=".activity.FrescoListActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data

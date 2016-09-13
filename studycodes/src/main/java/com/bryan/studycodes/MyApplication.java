@@ -5,10 +5,17 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.facebook.cache.disk.DiskCacheConfig;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import java.util.LinkedList;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Administrator on 2015/10/22.
@@ -29,6 +36,23 @@ public class MyApplication extends Application  implements Application.ActivityL
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
         refWatcher = LeakCanary.install(this);
+
+
+        //fresco硬盘缓存默认在手机内存，现配置到sd中，/Android/data/packagename/cache/...
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(this)
+                    .setBaseDirectoryPath(getExternalCacheDir())
+                    .build();
+
+        //使用okhttp，不再使用ImagePipelineConfig.newBuilder
+        OkHttpClient okHttpClient=new OkHttpClient.Builder().build();
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory.newBuilder(this,okHttpClient)
+                    .setMainDiskCacheConfig(diskCacheConfig)
+                   .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())  //开启渐进式加载
+                    .build();
+
+        Fresco.initialize(this,config);
+
+
     }
 
 

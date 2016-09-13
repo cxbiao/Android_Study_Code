@@ -48,7 +48,8 @@ public class MainActivity extends BaseActivity {
     private List<String> titles =new ArrayList<>();
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
-    ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class,LocalSocketActivity.class,BottomSheetActivity.class};
+    ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class,LocalSocketActivity.class,BottomSheetActivity.class
+    ,FrescoActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +185,7 @@ public class MainActivity extends BaseActivity {
         titles.add("LeftDrawer");
         titles.add("LocalSocket");
         titles.add("BottomSheet");
+        titles.add("Fresco");
 
 
     }

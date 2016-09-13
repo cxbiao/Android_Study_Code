@@ -37,19 +37,53 @@ android {
         abortOnError false
     }
 
+
+    productFlavors {
+
+        arm {
+            ndk {
+                abiFilter "armeabi"
+            }
+        }
+
+        x86 {
+            ndk {
+                abiFilter "x86"
+            }
+        }
+
+    }
+
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
-    compile "com.jakewharton:butterknife:7.0.1"
-    compile "com.android.support:design:${rootProject.ext.supportVersion}"
-    compile "com.alibaba:fastjson:1.1.46.android"
-    debugCompile "com.squareup.leakcanary:leakcanary-android:1.3.1"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.3.1"
-    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportVersion}"
-    compile "com.android.support:cardview-v7:${rootProject.ext.supportVersion}"
-    apt 'com.zhy:mpermission-compiler:1.0.0'
-    compile 'com.zhy:mpermission-api:1.0.0'
+    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    compile "com.android.support:design:${SUPPORT_VERSION}"
+    compile "com.alibaba:fastjson:${FASTJSON_VERSION}"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:${LEAKCANARY_VERSION}"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${LEAKCANARY_VERSION}"
+    compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:cardview-v7:${SUPPORT_VERSION}"
+    apt "com.zhy:mpermission-compiler:${MPERMISSION_VERSION}"
+    compile "com.zhy:mpermission-api:${MPERMISSION_VERSION}"
+
+    compile "com.facebook.fresco:fresco:${FRESCO_VERSION}"
+    compile "com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}"
+    compile "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
+    // 在 API < 14 上的机器支持 WebP 时，需要添加
+    //compile "com.facebook.fresco:animated-base-support:${FRESCO_VERSION}"
+
+    // 支持 GIF 动图，需要添加
+    //compile "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"
+
+    // 支持 WebP （静态图+动图），需要添加
+   // compile "com.facebook.fresco:animated-webp:${FRESCO_VERSION}"
+    //compile "com.facebook.fresco:webpsupport:${FRESCO_VERSION}"
+
+    // 仅支持 WebP 静态图，需要添加
+    //compile "com.facebook.fresco:webpsupport:${FRESCO_VERSION}"
+
 }

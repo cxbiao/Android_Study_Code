@@ -19,10 +19,6 @@ allprojects {
 }
 
 
-ext {
-    supportVersion = '24.2.0'
-}
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir
