@@ -1,10 +1,10 @@
 package com.bryan.studycodes.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bryan.studycodes.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -72,7 +72,9 @@ public class FrescoSingleActivity extends TitleBaseActivity {
         draweeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FrescoSingleActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(FrescoSingleActivity.this,FrescoPhotoActivity.class);
+                intent.putExtra("url",url1);
+                startActivity(intent);
             }
         });
 
