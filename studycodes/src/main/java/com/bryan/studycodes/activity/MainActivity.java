@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
     ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class,LocalSocketActivity.class,BottomSheetActivity.class
-    ,FrescoActivity.class};
+    ,FrescoActivity.class,WebViewActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +186,7 @@ public class MainActivity extends BaseActivity {
         titles.add("LocalSocket");
         titles.add("BottomSheet");
         titles.add("Fresco");
+        titles.add("h5原生获取位置与图片上传");
 
 
     }

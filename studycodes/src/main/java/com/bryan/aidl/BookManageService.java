@@ -35,13 +35,13 @@ public class BookManageService extends Service{
 
         @Override
         public List<Book> getBookList() throws RemoteException {
-            Log.d(TAG, Thread.currentThread().getName());
+            Log.i(TAG, Thread.currentThread().getName());
             return mBookList;
         }
 
         @Override
         public void addBook(Book book) throws RemoteException {
-            Log.d(TAG,Thread.currentThread().getName());
+            Log.i(TAG,Thread.currentThread().getName());
             mBookList.add(book);
         }
 
@@ -50,16 +50,16 @@ public class BookManageService extends Service{
            mListenerList.register(listener);
             int num=mListenerList.beginBroadcast();
             mListenerList.finishBroadcast();
-            Log.d(TAG, "registerListener,size:"+num);
+            Log.i(TAG, "registerListener,size:"+num);
         }
 
         @Override
         public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
            mListenerList.unregister(listener);
-            Log.d(TAG, "unregisterListener");
+            Log.i(TAG, "unregisterListener");
             int num=mListenerList.beginBroadcast();
              mListenerList.finishBroadcast();
-            Log.d(TAG, "registerListener,size:"+num);
+            Log.i(TAG, "registerListener,size:"+num);
         }
     };
 
@@ -95,7 +95,7 @@ public class BookManageService extends Service{
             IOnNewBookArrivedListener listener=mListenerList.getBroadcastItem(i);
             if(listener!=null){
                 listener.onNewBookArrived(book);
-                Log.d(TAG, "onNewBookArrived,notify listener:" + listener);
+                Log.i(TAG, "onNewBookArrived,notify listener:" + listener);
             }
 
         }

@@ -2,7 +2,6 @@ package com.bryan.studycodes;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 
 import com.facebook.cache.disk.DiskCacheConfig;
@@ -10,8 +9,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.util.LinkedList;
 
@@ -24,18 +21,18 @@ import okhttp3.OkHttpClient;
  */
 public class MyApplication extends Application  implements Application.ActivityLifecycleCallbacks{
 
-    private RefWatcher refWatcher;
-    public static RefWatcher getRefWatcher(Context context) {
-        MyApplication application = (MyApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }
+   // private RefWatcher refWatcher;
+//    public static RefWatcher getRefWatcher(Context context) {
+//        MyApplication application = (MyApplication) context.getApplicationContext();
+//        return application.refWatcher;
+//    }
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
-        refWatcher = LeakCanary.install(this);
+       // refWatcher = LeakCanary.install(this);
 
 
         //fresco硬盘缓存默认在手机内存，现配置到sd中，/Android/data/packagename/cache/...
@@ -61,17 +58,14 @@ public class MyApplication extends Application  implements Application.ActivityL
     public void onActivityCreated(Activity activity, Bundle arg1) {
         if (null != mExistedActivitys && null != activity) {
             // 把新的 activity 添加到最前面，和系统的 activity 堆栈保持一致
-            mExistedActivitys.offerFirst(new ActivityInfo(activity,ActivityInfo.STATE_CREATE));
+            mExistedActivitys.offerFirst(activity);
         }
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
         if (null != mExistedActivitys && null != activity) {
-            ActivityInfo info = findActivityInfo(activity);
-            if (null != info) {
-                mExistedActivitys.remove(info);
-            }
+            mExistedActivitys.remove(activity);
         }
     }
 
@@ -106,13 +100,12 @@ public class MyApplication extends Application  implements Application.ActivityL
             unregisterActivityLifecycleCallbacks( this );
 
             // 弹出的时候从头开始弹，和系统的 activity 堆栈保持一致
-            for (ActivityInfo info : mExistedActivitys) {
-                if (null == info || null == info.mActivity) {
+            for (Activity info : mExistedActivitys) {
+                if (null == info ) {
                     continue;
                 }
-
                 try {
-                    info.mActivity.finish();
+                    info.finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -124,42 +117,6 @@ public class MyApplication extends Application  implements Application.ActivityL
         }
     }
 
-    private ActivityInfo findActivityInfo(Activity activity) {
-        if (null == activity || null == mExistedActivitys) {
-            return null;
-        }
 
-        for (ActivityInfo info : mExistedActivitys) {
-            if (null == info) {
-                continue;
-            }
-
-            if (activity.equals(info.mActivity)) {
-                return info;
-            }
-        }
-
-        return null;
-    }
-
-    class ActivityInfo {
-        private final static int STATE_NONE = 0;
-        private final static int STATE_CREATE = 1;
-
-        Activity mActivity;
-        int mState;
-
-        ActivityInfo() {
-            mActivity = null;
-            mState = STATE_NONE;
-        }
-
-        ActivityInfo(Activity activity, int state) {
-            mActivity = activity;
-            mState = state;
-        }
-    }
-
-
-    private LinkedList<ActivityInfo> mExistedActivitys = new LinkedList<ActivityInfo>();
+    private LinkedList<Activity> mExistedActivitys = new LinkedList<Activity>();
 }

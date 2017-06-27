@@ -33,7 +33,7 @@ public class BookManagerActivity extends TitleBaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case MESSAGE_NEW_BOOK_ARRIVED:
-                    Log.d(TAG, "receive new book:"+msg.obj);
+                    Log.i(TAG, "receive new book:"+msg.obj);
                     break;
 
             }
@@ -44,7 +44,7 @@ public class BookManagerActivity extends TitleBaseActivity {
 
         @Override
         public void onNewBookArrived(Book newBook) throws RemoteException {
-            Log.d(TAG,Thread.currentThread().getName());
+            Log.i(TAG,Thread.currentThread().getName());
             mHandler.obtainMessage(MESSAGE_NEW_BOOK_ARRIVED,newBook).sendToTarget();
         }
     };

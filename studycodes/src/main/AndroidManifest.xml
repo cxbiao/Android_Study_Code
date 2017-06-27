@@ -50,6 +50,7 @@
         <activity android:name=".activity.FrescoSingleActivity"/>
         <activity android:name=".activity.FrescoListActivity"/>
         <activity android:name=".activity.FrescoPhotoActivity"/>
+        <activity android:name=".activity.WebViewActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
