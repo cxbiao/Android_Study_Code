@@ -37,7 +37,7 @@ public class WebViewActivity extends AppCompatActivity implements OnClickListene
 
    private String url;
 
-	private static final String initalUrl="file:///android_asset/location.html";
+	private static final String initalUrl="file:///android_asset/pic.html";  //location.html使用百度地图
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class WebViewActivity extends AppCompatActivity implements OnClickListene
 
 		webView.setWebViewClient(new CustomWebViewClient());
 		webView.setWebChromeClient(new CustomWebChromeClient());
+
 
 		webView.loadUrl(initalUrl);
 		closeButton.setOnClickListener(this);
@@ -129,7 +130,7 @@ public class WebViewActivity extends AppCompatActivity implements OnClickListene
 		}
 
 		//允许获得地理位置
-		//h5原生geolocation api无效，改用百度js api
+		//h5原生geolocation，需要硬件支持，模拟器无效
 		@Override
 		public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
 			callback.invoke(origin, true, true);
