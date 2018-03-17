@@ -1,5 +1,6 @@
 package com.bryan.studycodes.adapter;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,20 +16,44 @@ import java.util.List;
 /**
  * Author：Cxb on 2016/2/15 14:46
  */
-public class BottomAdapter extends RecyclerView.Adapter<BottomAdapter.MyHolder> {
+public class MyBluetoothAdapter extends RecyclerView.Adapter<MyBluetoothAdapter.MyHolder> {
 
 
     private Context context;
-    private List<String> data = new ArrayList<>();
+    private List<BluetoothDevice> data = new ArrayList<>();
 
-    public BottomAdapter(Context context, List data) {
+    public MyBluetoothAdapter(Context context) {
         this.context=context;
-        this.data = data;
     }
 
 
-    public interface OnItemClickLitener
-    {
+    public void setData(List<BluetoothDevice> data){
+        this.data=data;
+        notifyDataSetChanged();
+    }
+
+    public void addData(BluetoothDevice device){
+        if(device==null) return;
+        this.data.add(0,device);
+        notifyItemInserted(0);
+    }
+
+    public void addData(List<BluetoothDevice> devices){
+        if(devices==null || devices.size()==0) return;
+        this.data.addAll(devices);
+        notifyItemRangeInserted(this.data.size(),devices.size());
+    }
+
+    public void remove(int index){
+        this.data.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public BluetoothDevice getItem(int index){
+        return data.get(index);
+    }
+
+    public interface OnItemClickLitener {
         void onItemClick(View view, int position);
         void onItemLongClick(View view, int position);
     }
@@ -42,14 +67,29 @@ public class BottomAdapter extends RecyclerView.Adapter<BottomAdapter.MyHolder> 
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyHolder holder=new MyHolder(LayoutInflater.from(context).inflate(R.layout.recycler_item_bottom, parent, false));
+        MyHolder holder=new MyHolder(LayoutInflater.from(context).inflate(R.layout.recycler_item_bluetooth, parent, false));
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final MyHolder holder, int position) {
-         String title=data.get(position);
-         holder.tv_title.setText(title);
+         BluetoothDevice device=data.get(position);
+
+
+         StringBuilder sb=new StringBuilder();
+         sb.append(device.getName()+":"+device.getAddress()+";");
+         switch (device.getBondState()){
+             case BluetoothDevice.BOND_NONE:
+                 sb.append("未配对");
+                 break;
+             case BluetoothDevice.BOND_BONDING:
+                 sb.append("正在配对");
+                 break;
+             case BluetoothDevice.BOND_BONDED:
+                 sb.append("已配对");
+                 break;
+         }
+         holder.tv_title.setText(sb.toString());
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener()

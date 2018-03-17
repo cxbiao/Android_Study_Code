@@ -42,7 +42,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
     @Override
     public MainHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MainHolder holder=new MainHolder(LayoutInflater.from(context).inflate(R.layout.recycler_main_item, parent, false));
+        MainHolder holder=new MainHolder(LayoutInflater.from(context).inflate(R.layout.recycler_item_main, parent, false));
         return holder;
     }
 

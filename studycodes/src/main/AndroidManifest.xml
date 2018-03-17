@@ -8,12 +8,34 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+
+        <!--自定义Launcher，只有原生android手机有效-->
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true"
+            android:stateNotNeeded="true"
+            android:configChanges="mcc|mnc|orientation|keyboardHidden|screenSize|keyboardHidden|navigation|screenLayout|fontScale|uiMode|smallestScreenSize"
+            android:screenOrientation="nosensor"
+            android:theme="@style/LauncherTheme"
+            >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.HOME"/>-->
+                <!--<category android:name="android.intent.category.DEFAULT"/>-->
+                <!--<category android:name="android.intent.category.MONKEY"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity
             android:name=".activity.MainActivity"
            android:theme="@style/AppTheme.Launcher"
@@ -53,6 +75,7 @@
         <activity android:name=".activity.FrescoListActivity"/>
         <activity android:name=".activity.FrescoPhotoActivity"/>
         <activity android:name=".activity.WebViewActivity"/>
+        <activity android:name=".activity.BluetoothActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data

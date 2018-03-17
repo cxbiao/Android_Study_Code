@@ -2,6 +2,7 @@ package com.bryan.studycodes.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -24,7 +25,7 @@ import com.bryan.studycodes.vdh.VDHActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -32,16 +33,16 @@ public class MainActivity extends BaseActivity {
 
     public static final String TAG="MainActivity";
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.drawerLayout)
+    @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
-    @Bind(R.id.navigation)
+    @BindView(R.id.navigation)
     NavigationView navigationView;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.fabBtn)
+    @BindView(R.id.fabBtn)
     FloatingActionButton fabBtn;
 
     MainAdapter mAdapter;
@@ -49,7 +50,7 @@ public class MainActivity extends BaseActivity {
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
     ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class,LocalSocketActivity.class,BottomSheetActivity.class
-    ,FrescoActivity.class,WebViewActivity.class};
+    ,FrescoActivity.class,WebViewActivity.class,BluetoothActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(getBaseContext(), clazz[position]));
+
             }
 
             @Override
@@ -81,6 +83,9 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
+    private Handler mHandler=new Handler();
+
 
 
     public void  initView(){
@@ -187,6 +192,7 @@ public class MainActivity extends BaseActivity {
         titles.add("BottomSheet");
         titles.add("Fresco");
         titles.add("h5原生获取位置与图片上传");
+        titles.add("蓝牙");
 
 
     }
