@@ -10,6 +10,11 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -46,36 +51,75 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".largeimage.LargeImageSample" />
-        <activity android:name=".activity.GridHeaderActivity" />
-        <activity android:name=".activity.ProgressBarActivity" />
-        <activity android:name=".activity.MeasureActivity" />
-        <activity android:name=".activity.MoveActivity" />
-        <activity android:name=".activity.MessengerActivity" />
-        <activity android:name=".activity.BookManagerActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".largeimage.LargeImageSample" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.GridHeaderActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.ProgressBarActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.MeasureActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.MoveActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.MessengerActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.BookManagerActivity" />
         <activity
             android:name=".activity.ImageLoaderActivity"
             android:theme="@style/AppTheme.TransparentActivity"
             android:screenOrientation="portrait"
             />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.CustomCameraActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.LetterActivity"
             android:windowSoftInputMode="adjustPan"
             />
-        <activity android:name=".vdh.VDHActivity"/>
-        <activity android:name=".vdh.LeftDrawerLayoutActivity"/>
-        <activity android:name=".activity.LocalSocketActivity"/>
-        <activity android:name=".activity.BottomSheetActivity"/>
-        <activity android:name=".activity.FrescoActivity"/>
-        <activity android:name=".activity.FrescoSingleActivity"/>
-        <activity android:name=".activity.FrescoListActivity"/>
-        <activity android:name=".activity.FrescoPhotoActivity"/>
-        <activity android:name=".activity.WebViewActivity"/>
-        <activity android:name=".activity.BluetoothActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".vdh.VDHActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".vdh.LeftDrawerLayoutActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.LocalSocketActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.BottomSheetActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.FrescoActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.FrescoSingleActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.FrescoListActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.FrescoPhotoActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.WebViewActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.BluetoothActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.WiFiDirectActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data
@@ -90,10 +134,10 @@
 
         <service
             android:name=".messenger.MessengerService"
-            android:process=":remote" />
+            android:process=":remote1" />
         <service
             android:name="com.bryan.aidl.BookManageService"
-            android:process=":remote" />
+            android:process=":remote2" />
     </application>
 
 </manifest>
