@@ -12,7 +12,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.bryan.aidl.Book;
-import com.bryan.aidl.BookManageService;
+import com.bryan.studycodes.service.BookManageService;
 import com.bryan.aidl.IBookManager;
 import com.bryan.aidl.IOnNewBookArrivedListener;
 import com.bryan.studycodes.R;
@@ -44,6 +44,7 @@ public class BookManagerActivity extends TitleBaseActivity {
 
         @Override
         public void onNewBookArrived(Book newBook) throws RemoteException {
+            //客户端子线程
             Log.i(TAG,Thread.currentThread().getName());
             mHandler.obtainMessage(MESSAGE_NEW_BOOK_ARRIVED,newBook).sendToTarget();
         }
@@ -93,9 +94,8 @@ public class BookManagerActivity extends TitleBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_manager);
-        Intent intent=new Intent(this, BookManageService.class);
+        final Intent intent=new Intent(this, BookManageService.class);
         bindService(intent,conn,BIND_AUTO_CREATE);
-
         setHeaderTitle("AIDL");
     }
 

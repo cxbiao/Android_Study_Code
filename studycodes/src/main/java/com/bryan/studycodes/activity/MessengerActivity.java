@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.bryan.studycodes.Constant;
 import com.bryan.studycodes.R;
-import com.bryan.studycodes.messenger.MessengerService;
+import com.bryan.studycodes.service.MessengerService;
 import com.bryan.studycodes.utils.KLog;
 
 /**

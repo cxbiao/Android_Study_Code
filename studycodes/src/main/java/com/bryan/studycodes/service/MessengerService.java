@@ -1,4 +1,4 @@
-package com.bryan.studycodes.messenger;
+package com.bryan.studycodes.service;
 
 import android.app.Service;
 import android.content.Intent;

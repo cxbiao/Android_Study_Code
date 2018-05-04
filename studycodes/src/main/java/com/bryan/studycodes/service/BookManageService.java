@@ -1,4 +1,4 @@
-package com.bryan.aidl;
+package com.bryan.studycodes.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.bryan.aidl.Book;
+import com.bryan.aidl.IBookManager;
+import com.bryan.aidl.IOnNewBookArrivedListener;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

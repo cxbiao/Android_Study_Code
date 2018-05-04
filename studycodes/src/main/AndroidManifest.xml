@@ -133,10 +133,10 @@
         </receiver>
 
         <service
-            android:name=".messenger.MessengerService"
+            android:name=".service.MessengerService"
             android:process=":remote1" />
         <service
-            android:name="com.bryan.aidl.BookManageService"
+            android:name=".service.BookManageService"
             android:process=":remote2" />
     </application>
 
