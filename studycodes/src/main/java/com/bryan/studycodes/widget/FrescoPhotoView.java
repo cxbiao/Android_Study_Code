@@ -24,8 +24,8 @@ import com.facebook.imagepipeline.image.CloseableStaticBitmap;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.github.chrisbanes.photoview.PhotoView;
 
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * 自定义的View，我们就要处理好下面这几个函数，

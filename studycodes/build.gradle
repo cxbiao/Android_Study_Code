@@ -3,28 +3,23 @@ android {
     compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
     buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
 
+    signingConfigs {
+        config {
+            keyAlias 'bryan'
+            keyPassword '123456'
+            storeFile file('../key/bryan.jks')
+            storePassword '123456'
+        }
+    }
+
     defaultConfig {
         applicationId "com.bryan.studycodes"
         minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
-
-        // Gradle Plugin 1.5
-        // disable limited support for vector drawables fro Android Studio 1.4
-        //generatedDensities = []
-
-        // Gradle Plugin 2.0
-        // disable limited support for vector drawables fro Android Studio 1.4
          vectorDrawables.useSupportLibrary = true
     }
-
-    // Gradle Plugin 1.5
-    // disable limited support for vector drawables fro Android Studio 1.4
-//    aaptOptions {
-//        additionalParameters "--no-version-vectors"
-//    }
-
 
 
     sourceSets {
@@ -36,8 +31,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //移除未使用的资源
+            shrinkResources true
+            minifyEnabled true
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro','proguard-fresco.pro'
         }
     }
 
@@ -50,7 +48,7 @@ android {
 
         arm {
             ndk {
-                abiFilter "armeabi"
+                abiFilter "armeabi-v7a"
             }
             dimension "my"
         }
@@ -85,17 +83,15 @@ dependencies {
     implementation "com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}"
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
     implementation "com.github.chrisbanes:PhotoView:${PHOTOVIEW_VERSION}"
-    // 在 API < 14 上的机器支持 WebP 时，需要添加
-    //implementation "com.facebook.fresco:animated-base-support:${FRESCO_VERSION}"
 
-    // 支持 GIF 动图，需要添加
-    //implementation "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"
+    // For animated GIF support
+   // implementation "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"
 
-    // 支持 WebP （静态图+动图），需要添加
+    // For WebP support, including animated WebP
    // implementation "com.facebook.fresco:animated-webp:${FRESCO_VERSION}"
     //implementation "com.facebook.fresco:webpsupport:${FRESCO_VERSION}"
 
-    // 仅支持 WebP 静态图，需要添加
-    //implementation "com.facebook.fresco:webpsupport:${FRESCO_VERSION}"
+    // For WebP support, without animations
+   // implementation "com.facebook.fresco:webpsupport:${FRESCO_VERSION}"
 
 }

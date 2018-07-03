@@ -20,10 +20,8 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 public class FrescoSingleActivity extends TitleBaseActivity {
 
 
-    private static final String url1="http://www.bz55.com/uploads/allimg/150305/139-1503051FS0.jpg";
     private static final String url2="http://img5.imgtn.bdimg.com/it/u=543126909,1030891202&fm=206&gp=0.jpg";
     private static final String url3="http://cdn.duitang.com/uploads/blog/201403/03/20140303061128_hviXc.thumb.700_0.jpeg";
-    private static final String url4="http://www.bz55.com/uploads/allimg/150704/139-150F4102K3.jpg";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +53,7 @@ public class FrescoSingleActivity extends TitleBaseActivity {
 
     //渐进式加载网络图片
     private void progressive(){
-        Uri uri=Uri.parse(url4);
+        Uri uri=Uri.parse(url3);
         SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.iv_img2);
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setProgressiveRenderingEnabled(true)
@@ -73,7 +71,7 @@ public class FrescoSingleActivity extends TitleBaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(FrescoSingleActivity.this,FrescoPhotoActivity.class);
-                intent.putExtra("url",url1);
+                intent.putExtra("url",url3);
                 startActivity(intent);
             }
         });
