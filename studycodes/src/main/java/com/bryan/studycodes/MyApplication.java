@@ -2,7 +2,9 @@ package com.bryan.studycodes;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -53,6 +55,11 @@ public class MyApplication extends Application  implements Application.ActivityL
     }
 
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle arg1) {
