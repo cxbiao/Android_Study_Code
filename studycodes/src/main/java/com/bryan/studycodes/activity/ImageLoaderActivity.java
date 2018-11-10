@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -166,9 +167,11 @@ public class ImageLoaderActivity extends TitleBaseActivity implements AbsListVie
     public  void onPic(View v){
         if(!MPermissions.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, PermissionCode.REQUEST_SDCARD)){
             MPermissions.requestPermissions(this,PermissionCode.REQUEST_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
         }
 
     }
+
 
     @ShowRequestPermissionRationale(PermissionCode.REQUEST_SDCARD)
     public void whyNeedCard(){
@@ -199,7 +202,10 @@ public class ImageLoaderActivity extends TitleBaseActivity implements AbsListVie
 
     @PermissionDenied(PermissionCode.REQUEST_SDCARD)
     public void requestSdcardFailed() {
-        Toast.makeText(this, "用户拒绝授权!", Toast.LENGTH_SHORT).show();
+        if(!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            Toast.makeText(getBaseContext(), "始终拒绝!", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "用户拒绝授权!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
