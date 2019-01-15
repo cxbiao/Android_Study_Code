@@ -1,117 +1,86 @@
 package com.bryan.studycodes.utils;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.DhcpInfo;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class WifiUtils {
 
 
-    private WifiManager mWifiManager;
 
-    private static class WifiHolder {
-        private static WifiUtils mInstance=new WifiUtils();
-    }
-
-    private WifiUtils(){
-
-    }
-
-    public static WifiUtils getIntance(){
-        return WifiHolder.mInstance;
-    }
-
-
-    public void init(Context context){
-        mWifiManager= (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-    }
-
-    public boolean isWifiEnabled(){
-        return mWifiManager.isWifiEnabled();
-    }
-
-
-    public boolean isWifiApEnabled() {
-        try {
-            Method method = mWifiManager.getClass().getMethod("isWifiApEnabled");
-            return (Boolean) method.invoke(mWifiManager);
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
+    public static boolean isWifiEnabled(Context context){
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        return wifiManager.isWifiEnabled();
     }
 
 
     //wifi和热点不能同时打开
-    public void openWifi() {
-        if(!isWifiEnabled()) {
-           if(isWifiApEnabled()){
-               closeWifiAp();
+    public static void openWifi(Context context) {
+        if(!isWifiEnabled(context)) {
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+           if(WifiApUtils.isWifiApEnabled(context)){
+               WifiApUtils.closeWifiAp(context);
            }
-           mWifiManager.setWifiEnabled(true);
+            wifiManager.setWifiEnabled(true);
         }
     }
 
-    public void closeWifi() {
-        if(isWifiEnabled()) {
-            mWifiManager.setWifiEnabled(false);
+    public static void closeWifi(Context context) {
+        if(isWifiEnabled(context)) {
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            wifiManager.setWifiEnabled(false);
         }
     }
 
 
-    //android 8.0不支持反射打开热点
-    public void openWifiAp(String apName, String password) {
-        try {
-            if (mWifiManager.isWifiEnabled()) {
-                mWifiManager.setWifiEnabled(false);
-            }
-            Method method = mWifiManager.getClass().getMethod("setWifiApEnabled",
-                    WifiConfiguration.class, boolean.class);
-            WifiConfiguration apConfig = new WifiConfiguration();
-            //android 4.4不用设置 allowedKeyManagement默认即可
-            Field f=WifiConfiguration.KeyMgmt.class.getField("WPA2_PSK");
-            int type=f.getInt(null);
-            apConfig.allowedKeyManagement.set(type);
-            apConfig.preSharedKey = password;
-            apConfig.SSID = apName;
-            method.invoke(mWifiManager, apConfig, true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static int getWifiState(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        return wifiManager.getWifiState();
     }
 
-    public void closeWifiAp() {
-        if (isWifiApEnabled()) {
-            try {
-                Method method = mWifiManager.getClass().getMethod("getWifiApConfiguration");
-                WifiConfiguration config = (WifiConfiguration) method.invoke(mWifiManager);
-                Method method2 = mWifiManager.getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
-                method2.invoke(mWifiManager, config, false);
-            }  catch (Exception e) {
-                e.printStackTrace();
+
+    /**
+     * 获取连接的Wifi热点的IP地址
+     *
+     * @param context 上下文
+     * @return IP地址
+     */
+    public static String getHotspotIpAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiinfo = wifiManager == null ? null : wifiManager.getConnectionInfo();
+        if (wifiinfo != null) {
+            DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+            if (dhcpInfo != null) {
+                int address = dhcpInfo.gateway;
+                return ((address & 0xFF)
+                        + "." + ((address >> 8) & 0xFF)
+                        + "." + ((address >> 16) & 0xFF)
+                        + "." + ((address >> 24) & 0xFF));
             }
         }
+        return "";
     }
 
-
-    public int getWifiState() {
-        return mWifiManager.getWifiState();
-    }
-
-    //获取WIFI热点的状态：
-    public int getWifiApState() {
-        try {
-            Method method = mWifiManager.getClass().getMethod("getWifiApState");
-            return  (Integer) method.invoke(mWifiManager);
-        } catch (Exception e) {
-           e.printStackTrace();
-           return -1;
+    /**
+     * 获取连接Wifi后设备本身的IP地址
+     *
+     * @param context 上下文
+     * @return IP地址
+     */
+    public static String getLocalIpAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiinfo = wifiManager == null ? null : wifiManager.getConnectionInfo();
+        if (wifiinfo != null) {
+            int ipAddress = wifiinfo.getIpAddress();
+            return ((ipAddress & 0xFF)
+                    + "." + ((ipAddress >> 8) & 0xFF)
+                    + "." + ((ipAddress >> 16) & 0xFF)
+                    + "." + ((ipAddress >> 24) & 0xFF));
         }
+        return "";
     }
+
 
 
 
