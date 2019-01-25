@@ -85,6 +85,9 @@ dependencies {
     implementation "com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}"
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
     implementation "com.github.chrisbanes:PhotoView:${PHOTOVIEW_VERSION}"
+    //live data
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.lifecycle:livedata:1.1.1"
 
     // For animated GIF support
    // implementation "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"

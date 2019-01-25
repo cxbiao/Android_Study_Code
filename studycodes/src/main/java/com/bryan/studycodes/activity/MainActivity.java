@@ -19,6 +19,7 @@ import android.view.View;
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.adapter.MainAdapter;
 import com.bryan.studycodes.largeimage.LargeImageSample;
+import com.bryan.studycodes.livedata.LiveActivity;
 import com.bryan.studycodes.vdh.LeftDrawerLayoutActivity;
 import com.bryan.studycodes.vdh.VDHActivity;
 
@@ -50,7 +51,7 @@ public class MainActivity extends BaseActivity {
     private Class[] clazz=new Class[]{LargeImageSample.class,GridHeaderActivity.class,ProgressBarActivity.class
     ,MeasureActivity.class,MoveActivity.class,MessengerActivity.class,BookManagerActivity.class,ImageLoaderActivity.class
     ,CustomCameraActivity.class,LetterActivity.class,VDHActivity.class, LeftDrawerLayoutActivity.class,LocalSocketActivity.class,BottomSheetActivity.class
-    ,FrescoActivity.class,WebViewActivity.class,BluetoothActivity.class,WiFiDirectActivity.class};
+    ,FrescoActivity.class,WebViewActivity.class,BluetoothActivity.class,WiFiDirectActivity.class, LiveActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +195,7 @@ public class MainActivity extends BaseActivity {
         titles.add("h5原生获取位置与图片上传");
         titles.add("蓝牙");
         titles.add("WIFI DIRECT");
+        titles.add("LiveData");
 
 
     }

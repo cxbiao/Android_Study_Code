@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     >
 
-    <include
-        android:id="@+id/frame_title_header"
-        layout="@layout/header_bar"/>
+
 
     <Button
         android:layout_width="wrap_content"

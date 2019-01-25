@@ -27,7 +27,7 @@ public class LargeImageSample extends TitleBaseActivity {
         image= (ImageView) findViewById(R.id.image);
 
         try {
-            InputStream inputStream=getAssets().open("tangyan.jpg");
+            InputStream inputStream=getAssets().open("qm.jpg");
 
             //获得图片宽高
             BitmapFactory.Options options=new BitmapFactory.Options();

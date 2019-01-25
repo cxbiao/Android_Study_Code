@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/frame_title_header"
-        layout="@layout/header_bar"/>
 
     <RelativeLayout
         android:id="@+id/ll_move"

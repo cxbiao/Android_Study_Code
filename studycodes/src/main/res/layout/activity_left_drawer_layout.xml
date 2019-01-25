@@ -13,9 +13,7 @@
         android:onClick="back"
         android:clickable="true">
 
-        <include
-            android:id="@+id/frame_title_header"
-            layout="@layout/header_bar"/>
+
 
         <TextView
             android:id="@+id/id_content_tv"

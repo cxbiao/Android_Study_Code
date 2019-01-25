@@ -123,6 +123,9 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".activity.WiFiDirectActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".livedata.LiveActivity"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data

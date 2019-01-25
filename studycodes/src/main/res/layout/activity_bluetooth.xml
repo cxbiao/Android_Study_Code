@@ -6,9 +6,6 @@
     android:background="#F2F2F2"
     >
 
-    <include
-        android:id="@+id/frame_title_header"
-        layout="@layout/header_bar"/>
 
     <TextView
         android:id="@+id/tv_status"

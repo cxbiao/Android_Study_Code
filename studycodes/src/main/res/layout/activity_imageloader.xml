@@ -20,9 +20,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/frame_title_header"
-                layout="@layout/header_bar"/>
+
 
             <ImageView
                 android:id="@+id/img_http"
