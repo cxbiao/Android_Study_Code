@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
@@ -63,6 +65,17 @@ android {
 
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
+        }
+    }
+
+}
+String releaseTime() {
+    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd-HH-mm")
+    String path=sf.format(new Date())
+    return path
 }
 
 dependencies {
@@ -79,7 +92,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
     implementation "com.android.support:cardview-v7:${SUPPORT_VERSION}"
     annotationProcessor "com.zhy:mpermission-compiler:${MPERMISSION_VERSION}"
-    implementation "com.zhy:mpermission-api:${MPERMISSION_VERSION}"
+   // implementation "com.zhy:mpermission-api:${MPERMISSION_VERSION}"
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
     implementation "com.facebook.fresco:fresco:${FRESCO_VERSION}"
     implementation "com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}"
