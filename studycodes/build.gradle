@@ -65,6 +65,12 @@ android {
 
     }
 
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     applicationVariants.all { variant ->
         variant.outputs.all {
             outputFileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
@@ -81,26 +87,26 @@ String releaseTime() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
-    implementation "com.android.support:design:${SUPPORT_VERSION}"
+    implementation 'com.google.android.material:material:1.0.0'
     implementation "com.alibaba:fastjson:${FASTJSON_VERSION}"
     debugImplementation"com.squareup.leakcanary:leakcanary-android:${LEAKCANARY_VERSION}"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAKCANARY_VERSION}"
-    implementation "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
-    implementation "com.android.support:cardview-v7:${SUPPORT_VERSION}"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     annotationProcessor "com.zhy:mpermission-compiler:${MPERMISSION_VERSION}"
    // implementation "com.zhy:mpermission-api:${MPERMISSION_VERSION}"
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45-androidx'
     implementation "com.facebook.fresco:fresco:${FRESCO_VERSION}"
     implementation "com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}"
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
     implementation "com.github.chrisbanes:PhotoView:${PHOTOVIEW_VERSION}"
     //live data
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    implementation "android.arch.lifecycle:livedata:1.1.1"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
 
     // For animated GIF support
    // implementation "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"

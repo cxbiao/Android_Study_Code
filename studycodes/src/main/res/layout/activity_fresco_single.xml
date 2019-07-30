@@ -7,7 +7,7 @@
 
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,13 +22,14 @@
                 android:layout_height="200dp"
                 fresco:placeholderImage="@mipmap/ic_launcher" />
 
+            <!--图片加载失败后，显示的重试加载的图片retryImage，重试4次后才形式错误的图片-->
             <com.facebook.drawee.view.SimpleDraweeView
                 android:layout_marginTop="5dp"
                 android:id="@+id/iv_img2"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 fresco:placeholderImage="@mipmap/ic_launcher"
-
+                fresco:failureImage="@color/error"
                 />
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -57,7 +58,7 @@
         </LinearLayout>
 
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

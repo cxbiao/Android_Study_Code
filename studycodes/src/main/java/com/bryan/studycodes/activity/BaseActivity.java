@@ -1,7 +1,7 @@
 package com.bryan.studycodes.activity;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.utils.StatusBarCompat;

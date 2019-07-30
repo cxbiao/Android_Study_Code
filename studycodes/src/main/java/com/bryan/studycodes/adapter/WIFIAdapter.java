@@ -1,7 +1,7 @@
 package com.bryan.studycodes.adapter;
 
 import android.net.wifi.p2p.WifiP2pDevice;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.bryan.studycodes.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;

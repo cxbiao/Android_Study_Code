@@ -1,9 +1,9 @@
 package com.bryan.studycodes.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.adapter.FrescoAdapter;
@@ -18,8 +18,8 @@ public class FrescoListActivity extends TitleBaseActivity {
             "http://news.xinhuanet.com/photo/2015-09/23/128257164_14429624216661n.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383299_1976.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383291_6518.jpg",
-            "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg",
-            "http://img.my.csdn.net/uploads/201407/26/1406383290_9329.jpg",
+            "http://img5.imgtn.bdimg.com/it/u=543126909,1030891202&fm=206&gp=0.jpg",
+            "http://cdn.duitang.com/uploads/blog/201403/03/20140303061128_hviXc.thumb.700_0.jpeg",
             "http://img.my.csdn.net/uploads/201407/26/1406383290_1042.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383275_3977.jpg",
             "http://img.my.csdn.net/uploads/201407/26/1406383265_8550.jpg",

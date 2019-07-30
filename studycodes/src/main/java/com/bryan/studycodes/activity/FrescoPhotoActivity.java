@@ -2,9 +2,10 @@ package com.bryan.studycodes.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.widget.FrescoPhotoView;
