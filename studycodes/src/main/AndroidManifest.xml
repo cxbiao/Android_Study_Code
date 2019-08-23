@@ -126,6 +126,9 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".livedata.LiveActivity"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".livedata.LiveActivity2"/>
 
         <receiver android:name=".appwidget.MyAppWidgetProvider">
             <meta-data

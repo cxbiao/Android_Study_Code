@@ -1,6 +1,5 @@
 package com.bryan.studycodes.livedata;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LiveActivity extends TitleBaseActivity {
+public class LiveActivity2 extends TitleBaseActivity {
 
     @BindView(R.id.btn_send)
     Button btnSend;
@@ -24,14 +23,14 @@ public class LiveActivity extends TitleBaseActivity {
     TextView tvData;
     private MyViewModel mVm;
 
-    private static final String TAG = "LiveActivity";
+    private static final String TAG = "LiveActivity2";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livedata);
         ButterKnife.bind(this);
-        setHeaderTitle("LiveData");
+        setHeaderTitle("LiveData2");
 //        mVm = ViewModelProviders.of(this).get(MyViewModel.class);
 //        mVm.getLiveData().observe(this, new Observer<String>() {
 //            @Override
@@ -40,7 +39,6 @@ public class LiveActivity extends TitleBaseActivity {
 //                tvData.setText(s);
 //            }
 //        });
-
         MyStockData.getInstance().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -53,7 +51,9 @@ public class LiveActivity extends TitleBaseActivity {
 
     @OnClick(R.id.btn_send)
     public void send() {
-        //mVm.getLiveData().setValue("LiveActivity");
-        startActivity(new Intent(this,LiveActivity2.class));
+       // mVm.getLiveData().setValue("LiveActivity");
+        MyStockData.getInstance().setValue("LiveActivity2");
+        
+       
     }
 }

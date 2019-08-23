@@ -3,25 +3,27 @@ package com.bryan.studycodes.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bryan.studycodes.R;
 import com.bryan.studycodes.adapter.MainAdapter;
 import com.bryan.studycodes.largeimage.LargeImageSample;
 import com.bryan.studycodes.livedata.LiveActivity;
+import com.bryan.studycodes.loader.SkinInflaterFactory;
 import com.bryan.studycodes.vdh.LeftDrawerLayoutActivity;
 import com.bryan.studycodes.vdh.VDHActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getLayoutInflater().setFactory2(new SkinInflaterFactory());
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -84,6 +87,7 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
 
     private Handler mHandler=new Handler();
 

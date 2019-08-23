@@ -1,16 +1,17 @@
 package com.bryan.studycodes.livedata;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import com.bryan.studycodes.R;
 
@@ -26,7 +27,7 @@ public class LiveTwoFragment extends Fragment {
     TextView tvData;
     Unbinder unbinder;
 
-    private MyViewModel mVm;
+    private MyViewModel mVm2;
 
     @Nullable
     @Override
@@ -39,10 +40,18 @@ public class LiveTwoFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mVm = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-        mVm.getLiveData().observe(this, new Observer<String>() {
+//        mVm2 = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+//        mVm2.getLiveData().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                Log.i("LiveActivityTwo","onChanged:"+s);
+//                tvData.setText(s);
+//            }
+//        });
+        MyStockData.getInstance().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
+                Log.i("LiveActivityTwo","onChanged:"+s);
                 tvData.setText(s);
             }
         });
@@ -50,7 +59,8 @@ public class LiveTwoFragment extends Fragment {
 
     @OnClick(R.id.btn_send)
     public void send() {
-        mVm.getLiveData().setValue("LiveTwoFragment");
+       // mVm2.getLiveData().setValue("LiveTwoFragment");
+        MyStockData.getInstance().setValue("LiveTwoFragment");
     }
 
     @Override

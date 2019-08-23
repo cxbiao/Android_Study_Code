@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F2F2F2"
+    >
+
+    <!--<include-->
+        <!--android:id="@+id/frame_title_header"-->
+        <!--layout="@layout/header_bar"/>-->
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity发送数据"
+        />
+
+    <TextView
+        android:id="@+id/tv_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        />
+
+    <fragment
+        android:id="@+id/f1"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        class="com.bryan.studycodes.livedata.LiveOneFragment"/>
+
+    <fragment
+        android:id="@+id/f2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        class="com.bryan.studycodes.livedata.LiveTwoFragment"/>
+
+
+</LinearLayout>
