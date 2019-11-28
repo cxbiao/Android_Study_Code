@@ -88,14 +88,14 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
     implementation 'com.google.android.material:material:1.0.0'
     implementation "com.alibaba:fastjson:${FASTJSON_VERSION}"
     debugImplementation"com.squareup.leakcanary:leakcanary-android:${LEAKCANARY_VERSION}"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${LEAKCANARY_VERSION}"
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     annotationProcessor "com.zhy:mpermission-compiler:${MPERMISSION_VERSION}"
    // implementation "com.zhy:mpermission-api:${MPERMISSION_VERSION}"
@@ -105,8 +105,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
     implementation "com.github.chrisbanes:PhotoView:${PHOTOVIEW_VERSION}"
     //live data
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
 
     // For animated GIF support
    // implementation "com.facebook.fresco:animated-gif:${FRESCO_VERSION}"
